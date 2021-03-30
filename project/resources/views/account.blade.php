@@ -26,7 +26,7 @@
                                 <h3>{{trans('app.AccountInformation')}}</h3>
                                 <div class="single-account-info-div">
                                     <div class="row">
-                                        @if(count($address) > 0)
+                                        @if($address != "")
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <p class="colored-p">{{trans('app.DefaultBillingAddress')}} <a href="{{route('user.billinginfo',$subdomain_name)}}"><i class="fa fa-edit"></i></a></p>
 
