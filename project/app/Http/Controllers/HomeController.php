@@ -51,7 +51,7 @@ class HomeController extends Controller
         $buytheme = Buytheme::join('company', 'company.id', '=', 'buythemes.company_id')->join('themes', 'themes.id', '=', 'buythemes.themeid')->whereRaw('DATE(buythemes.created_at) BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()')->where('buythemes.company_id', '=', $companyid)->orderBy('buythemes.id','desc')->select(DB::raw("buythemes.*,company.comapany_name,themes.themename"))->get();
 
         $gettitcket = Ticket::where('status',1)->where('company_id', '=', $companyid)->get();
-        $ticket ='';
+        $ticket =[];
 
         foreach($gettitcket as $allticket)
         {

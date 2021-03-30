@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use Illuminate\Support\Str;
 
 class SettingsController extends Controller
 {
@@ -389,7 +390,7 @@ class SettingsController extends Controller
         $companyid = get_company_id();
 
         $logo = $request->file('logo');
-        $name = str_random(3).$logo->getClientOriginalName();
+        $name = Str::random(3).$logo->getClientOriginalName();
         $logo->move('assets/images/company',$name);
 
         DB::table('settings')

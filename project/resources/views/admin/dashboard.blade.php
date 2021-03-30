@@ -256,7 +256,7 @@
                     <div class="prtm-block-content">
                         <div class="prtm-to-do">
                             <ul class="list-unstyled border-list-xs">
-                            @if(isset($ticket) && count(array($ticket)) > 0 && $ticket != "")
+                            @if(isset($ticket) && count(array($ticket)) > 0 )
                                 @foreach($ticket as $row)
                                     @if($row->ticketstatus  != 1)
                                     <li>
