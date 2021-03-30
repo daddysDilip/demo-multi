@@ -1,0 +1,1 @@
+<div>No Page Found.</div><?php /**PATH D:\wamp\www\on_git\multi-ecomm\project\resources\views/errors/404.blade.php ENDPATH**/ ?>
