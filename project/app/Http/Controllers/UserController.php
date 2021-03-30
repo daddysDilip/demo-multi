@@ -262,57 +262,53 @@ class UserController extends Controller
         { $i=1;
             foreach ($posts as $post)
             {
-            // $etitle=CmsTranslations::where('cmsid',$post->id)->where('langcode',app()->getLocale() )->first()->title;
+                // $etitle=CmsTranslations::where('cmsid',$post->id)->where('langcode',app()->getLocale() )->first()->title;
                         
-               $userid = get_user_id();
-               $roleid = get_user_role_id();
+                $userid = get_user_id();
+                $roleid = get_user_role_id();
                 $sadmin = get_sadmin_user_id(); 
 
 
-                         foreach($sadmin as $alldata)
-                         {
-                             $sid[]= $alldata->id; 
-                         }
-                                 
-                              
+                foreach($sadmin as $alldata)
+                {
+                    $sid[]= $alldata->id; 
+                }       
 
                 $nestedData['name'] =$post->name;
                 $nestedData['email'] =$post->email;
                 $nestedData['phone'] =$post->phone;
                         
-                     if(!in_array($post->created_by, $sid))
-                     {
-                                        if($post->id != $userid)
-                                        {
-                                            if($post->status == 1)
-                                            {
-
-                  $nestedData['status'] = "<a href='".url('admin/user')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
-
-                 }
-                          
-                elseif($post->status == 0)
+                if(!in_array($post->created_by, $sid))
                 {
-                      $nestedData['status'] = "<a href='".url('admin/user')."/status/$post->id}}/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
-
-                }
-                else
+                    if($post->id != $userid)
+                    {
+                        if($post->status == 1)
+                        {
+                            $nestedData['status'] = "<a href='".url('admin/user')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
+                        }
+                        elseif($post->status == 0)
+                        {
+                              $nestedData['status'] = "<a href='".url('admin/user')."/status/$post->id}}/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
+                        }
+                        else
+                        {
+                             $nestedData['status'] = '-';
+                        }
+                    }else
+                    {
+                         $nestedData['status'] = '-';
+                    }
+                }else
                 {
                      $nestedData['status'] = '-';
                 }
-            }
-        } else
+
+                if(!in_array($post->created_by, $sid))
                 {
-                     $nestedData['status'] = '-';
-                }
-
-                 if(!in_array($post->created_by, $sid))
-                 {
-
                     if($post->id != $userid)
                     {
 
-                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='roles/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li></ul></div>";
+                        $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='roles/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li></ul></div>";
                     } else
                     {
                         $nestedData['action'] = '-';
@@ -327,7 +323,7 @@ class UserController extends Controller
                 $i++;
             }
              //  echo "<pre>"; print_r($nestedData); echo "</pre>"; exit();
-        }          
+        }        
         $json_data=array(
                   "draw"            => intval($request->input('draw')),  
                   "recordsTotal"    => intval($totalData),  
