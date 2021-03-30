@@ -390,7 +390,7 @@ class SettingsController extends Controller
         $companyid = get_company_id();
 
         $logo = $request->file('logo');
-        $name = Str::random(3).$logo->getClientOriginalName();
+        $name = str_random(3).$logo->getClientOriginalName();
         $logo->move('assets/images/company',$name);
 
         DB::table('settings')
