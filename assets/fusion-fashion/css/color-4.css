@@ -1,0 +1,65 @@
+*::selection {
+    background-color: #FF9800;
+	color:#fff;
+}
+
+/* Background Color */
+
+.before-header,.search-btn,.product-slider-wrap .product-wrapper .prod-header span:after,.cart-total .order-btn.checkout,.sale-tag,button.buy-now, a.buy-now, .blog-slider-main .owl-carousel .owl-nav .owl-prev:before,.blog-slider-main .owl-carousel .owl-nav .owl-next:before,.social-icons ul li:hover,.product-grid-wrap .prod-cat-name:after,.product-grid-wrap .nav-tabs>li.active>a,.product-grid-wrap .nav-tabs>li.active>a:focus,.product-grid-wrap .nav-tabs>li.active>a:hover,.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover,.blog-sidebar ul.tags li a:hover,.cart-total a.checkout,.sign-inwrap .form-box .btn-default.green,.preloader,#sidebar ul li.active > a, a[aria-expanded="true"],ul.components ul a{
+	background-color: #FF9800;
+}
+
+/* Text Color */
+
+span.regis-login a,.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,.shop-by-catgwrap .nav-verticalmenu > li > a:hover,.dropdown-sub > ul li a:hover,.wishlst-cart a,.dropdown-menu-inner ul li a:hover,.carousel-indicators .active,.carousel-inner .item .slider-text h4 span,.btn-main,.three-star .three-star-box span p,.info span,.breadcrumb>.active,.prod-sidebar h3.filter,.prod-sidebar .panel-group .panel-title > a[aria-expanded="true"]:after,.prod-sidebar .panel-group [aria-expanded="true"],.panel-body ul li a:hover,a.add-to-cart:hover, a.wishlist:hover,button.buy-now:hover,.product-detail-wrap .nav-tabs>li.active>a,.product-detail-wrap  .nav-tabs>li.active>a:focus,.product-detail-wrap  .nav-tabs>li.active>a:hover,.product-detail-wrap .nav>li>a:focus,.product-detail-wrap .nav>li>a:hover,.blog-grid-text a.read-more,.blog-sidebar ul.blog li a:hover,.blog-detail .detail-text .qoute .name,.blog-detail .detail-text .share-on-social ul li a:hover,.cart-total ul li span.title a:hover,.checkout-wrap p.login a,.navbar-brand span/*#sidebar ul li a:hover*/{
+	color: #FF9800;
+}
+
+/* Border Color */
+
+#verticalmenu .navbar,.carousel-indicators .active,.btn-main,a.add-to-cart:hover, a.wishlist:hover,.cart-total .order-btn.checkout,button.buy-now:hover,.blog-detail .detail-text .share-on-social ul li a:hover,.dropdown-menu-inner h4 a{
+	border-color:#FF9800;
+}
+
+
+.product-detail-wrap .nav-tabs>li.active>a,.product-detail-wrap  .nav-tabs>li.active>a:focus,.product-detail-wrap  .nav-tabs>li.active>a:hover,.product-detail-wrap .nav>li>a:focus,.product-detail-wrap .nav>li>a:hover{
+	border-bottom-color: #FF9800;
+}
+
+.blog-detail .detail-text .qoute{
+	border-left-color:#FF9800;
+}
+.cart-total ul li.active > a,.cart-total a[aria-expanded="true"]{
+	background: transparent !important;
+	color: #FF9800 !important;
+}
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .adv-banners .shop_text, .filter-wrap.filter-tag ul li a:hover,
+.discount_detail .code_box_body
+{
+	color: #FF9800;
+}
+.slider .slider-handle 
+{
+	border: 5px solid #FF9800;
+}
+.slider .slider-selection, #reviews .btn-review, a.shopping-btn,.discountslider #demo .carousel-indicators li,
+.change-pass-btn, .address-btn, .back-btn, .save-btn,.order-btn, .comments-form .contact_btn    
+{
+	background-color: #FF9800;
+	border: 1px solid #FF9800;
+}
+.filter-price input.price-search-btn, .my-cart-wrap .apply_code, .discount_detail .code_box_header,
+.discountslider #demo .voucher_bgimg button.btn, .order_confirm_btn  
+{
+	border: 1px solid #FF9800;
+    background-color: #FF9800;
+}
+.print-order-btn
+{
+	border: 1px solid #FF9800;
+    color: #FF9800;
+}
+.my-cart .tt-badge-cart
+{
+	background: #FF9800;
+}

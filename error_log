@@ -1,0 +1,22 @@
+[05-Dec-2018 05:17:58 UTC] PHP Fatal error:  Call to undefined function App\Http\Controllers\get_productdetail() in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/OrderController.php on line 111
+[05-Dec-2018 05:19:22 UTC] PHP Fatal error:  Call to undefined function App\Http\Controllers\get_company_id() in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/OrderController.php on line 73
+[05-Dec-2018 05:24:44 UTC] PHP Fatal error:  Call to undefined function App\Http\Controllers\get_productdetail() in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/OrderController.php on line 111
+[07-Dec-2018 08:46:14 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 08:56:12 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 09:03:19 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 09:03:41 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 09:04:14 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Sadmin\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 110
+[07-Dec-2018 09:04:30 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 09:22:02 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 09:22:38 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/TicketController.php on line 109
+[07-Dec-2018 09:53:48 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/TicketController.php on line 109
+[07-Dec-2018 09:55:45 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/TicketController.php on line 109
+[07-Dec-2018 09:55:46 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/TicketController.php on line 109
+[07-Dec-2018 09:55:58 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/TicketController.php on line 109
+[07-Dec-2018 11:22:48 UTC] PHP Fatal error:  Call to a member function delete() on null in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/FrontEndController.php on line 310
+[07-Dec-2018 12:26:46 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 13:23:58 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 13:23:59 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 13:23:59 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 13:24:48 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111
+[07-Dec-2018 13:25:00 UTC] PHP Fatal error:  Class 'App\Ticketfiles' not found in /home2/skylinktec/estorewhiz.com/project/app/Http/Controllers/Sadmin/TicketController.php on line 111

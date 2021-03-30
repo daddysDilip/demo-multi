@@ -1,0 +1,57 @@
+.side-panel {
+    background: none repeat scroll 0 0 #222222;
+    left: -230px;
+    position: fixed;
+    top:200px;
+    transition: all 0.4s ease 0s;
+    width: 230px;
+    z-index: 1000000000;
+    padding: 20px ;
+}
+.side-panel:hover{
+    left: 0;
+}
+.side-panel:before {
+    content: "";
+    position: absolute;
+    right: -40px;
+    height: 40px;
+    top: 0;
+    width: 40px;
+    background: url("../images/magic-wand.png") no-repeat scroll center center #E9B24B;
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    -ms-border-radius: 0 3px 3px 0;
+    -o-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+}
+.colors h6 {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.colors a {
+    float: left;
+    width: 40px;
+    cursor: pointer;
+    height: 40px;
+    margin-right: 10px;
+    background: black;
+}
+.colors a:last-child{
+    margin:0; 
+}
+.colors a.color-1{
+    background-color: #D81B5B;
+}
+.colors a.color-2{
+    background-color: #97CC02;
+}
+.colors a.color-3{
+    background-color: #56CFE1;
+}
+.colors a.color-4{
+    background-color: #FF9800;
+}
