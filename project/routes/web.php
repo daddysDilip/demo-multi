@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::group(['domain' => 'demomulti.com'], function()
+Route::group(['domain' => 'demo-multi.com'], function()
 {
     Route::get('admin/login', function () {
         return redirect('sadmin/login');
@@ -202,7 +202,7 @@ Route::group(['domain' => 'demomulti.com'], function()
 	Route::get('/{slug}', 'Sadmin\FrontEndController@cmsshow');
 
 }); 
-Route::group(['domain' => '{subdomain}.demomulti.com'], function()
+Route::group(['domain' => '{subdomain}.demo-multi.com'], function()
 {    
     Route::post('/language-chooser','LanguageController@changeLanguage');
 
