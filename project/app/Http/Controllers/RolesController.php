@@ -78,16 +78,18 @@ class RolesController extends Controller
         $roletrans['langcode'] = $request->default_langcode;
         $roletrans['company_id'] = get_company_id();
         $roletrans->save();
-
-        foreach($request->langcode as $data => $transdata)
+        if($request->langcode)
         {
-            $rolealltrans = new RoleTranslations();
-            $rolealltrans['roleid'] = $lastid;
-            $rolealltrans['role'] = $request->trans_role[$data];
-            $rolealltrans['langcode'] = $transdata;
-            $rolealltrans['company_id'] = get_company_id();
-            $rolealltrans->save();    
-            
+            foreach($request->langcode as $data => $transdata)
+            {
+                $rolealltrans = new RoleTranslations();
+                $rolealltrans['roleid'] = $lastid;
+                $rolealltrans['role'] = $request->trans_role[$data];
+                $rolealltrans['langcode'] = $transdata;
+                $rolealltrans['company_id'] = get_company_id();
+                $rolealltrans->save();    
+                
+            }            
         }
 
         return redirect('admin/roles')->with('message','New Role Added Successfully.');
