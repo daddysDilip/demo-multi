@@ -25,21 +25,20 @@
                         @endif
                     </div>
 
-                    @if(count($slider) > 0)
                     <div class="prtm-block-title mrgn-b-lg">
                         <div class="caption">
                             <a href="{!! url('admin/sliders/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> {{trans('app.AddNew')}} </a>
                             
-                            @if(count($slider) > 0)
+                            @if(count($slider) > 0) 
                                 <a href="{!! url('admin/exportsliders') !!}" class="btn btn-primary btn-add"><i class="fa fa-download"></i> {{trans('app.Export')}}</a>
-                            @endif
+                            @endif 
 
                             <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#modal-default"><i class="fa fa-file-excel-o"></i> Import</button>
 
                             <a href="http://adminuser.multiecom.com/assets/importtile/Slider.xls"><button type="button" class="btn btn-primary btn-add"><i class="fa fa-file-excel-o"></i> Demo File</button></a>
                         </div>
                     </div>
-                    @endif
+                   
 
                     <table class="table table-striped table-bordered" cellspacing="0" id="posts" width="100%">
                         <thead>

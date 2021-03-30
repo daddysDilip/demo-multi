@@ -193,7 +193,7 @@ class UserProfileController extends Controller
             $address = CustomerAddress::where('customerid',Auth::guard('profile')->user()->id)->first();
             $country = Country::where('status','1')->get();
 
-            if($address != 0)
+            if($address != "")
             {
                 $billingstate = State::where('status','1')->where('countryid',$address->billing_country)->get();
                 $billingcity = City::where('status','1')->where('stateid',$address->billing_state)->get();
