@@ -62,7 +62,7 @@ class HomeController extends Controller
 
         $newticket = Ticket::where('tickets.ticketstatus',1)->get();
 
-        return view('sadmin.dashboard',compact('newcompany','upgradeplan','buytheme','expireplan','newinquiry','newticket'));
+        return view('sadmin.dashboard2',compact('newcompany','upgradeplan','buytheme','expireplan','newinquiry','newticket'));
     }
 
     public function monthlygraph()

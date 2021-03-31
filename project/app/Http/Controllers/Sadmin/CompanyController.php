@@ -49,7 +49,7 @@ class CompanyController extends Controller
     public function index()
     {
         $company = Company::orderBy('id','desc')->get();
-        return view('sadmin.companylist',compact('company'));
+        return view('sadmin.companylist2',compact('company'));
     }
 
     /**
@@ -62,7 +62,7 @@ class CompanyController extends Controller
 		$country = Country::where('status','1')->get();
 		$plans = Plans::where('status','1')->get();
 		$languages=Language::where('status','1')->get();
-        return view('sadmin.companyadd',compact('country','plans','languages'));
+        return view('sadmin.companyadd2',compact('country','plans','languages'));
     }
 
     /**
@@ -674,14 +674,14 @@ class CompanyController extends Controller
 
                  if($post->status == 1)
                  {
-                  $nestedData['status'] = "<a href='".url('sadmin/company')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
+                  $nestedData['status'] = "<a href='".url('sadmin/company')."/status/$post->id}}/0'class='"."badge badge-success'>Active</a>";
 
                  }
                                         
                 elseif($post->status == 0)
                 {
                 
-                $nestedData['status'] = "<a href='".url('sadmin/company')."/status/$post->id}}/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
+                $nestedData['status'] = "<a href='".url('sadmin/company')."/status/$post->id}}/1'class='"."badge badge-danger'>Deactive</a>";
                 }
                       
 
