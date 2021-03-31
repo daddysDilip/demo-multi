@@ -13,6 +13,7 @@ use Auth;
 use DB;
 use Excel;
 use App\ArchiveCategory;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -223,7 +224,7 @@ class CategoryController extends Controller
 
         $categorydeflang_exists = CategoryTranslations::where('langcode', '=', $request->default_langcode)->where('categoryid', '=', $id)->first();
 
-        if(count($categorydeflang_exists) > 0)
+        if($categorydeflang_exists != null)
         {
             CategoryTranslations::where('langcode', '=', $request->default_langcode)->where('categoryid', '=', $id)->update(['name' => $request->name]);
         }
@@ -243,7 +244,7 @@ class CategoryController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $categorylang_exists = CategoryTranslations::where('langcode', '=', $transdata)->where('categoryid', '=', $id)->first();
-            if(count($categorylang_exists) > 0)
+            if($categorylang_exists != null)
             {
 
                 CategoryTranslations::where('langcode', '=', $transdata)->where('categoryid', '=', $id)->update(['name' => $request->trans_name[$data]]);
@@ -287,7 +288,7 @@ class CategoryController extends Controller
         }
         else
         {
-            $name_exists = (count(\App\Category::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+            $name_exists = (count(\App\Category::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get())  > 0) ? false : true;
             return response()->json($name_exists);
         }  
     }
@@ -299,12 +300,12 @@ class CategoryController extends Controller
 
         if($id != '')
         {
-            $slug_exists = (count(\App\Category::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('slug', '=', $request->input('slug'))->get()) > 0) ? false : true;
+            $slug_exists = (count(\App\Category::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('slug', '=', $request->input('slug'))->get())  > 0) ? false : true;
             return response()->json($slug_exists);
         }
         else
         {
-            $slug_exists = (count(\App\Category::where('slug', '=', $request->input('slug'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+            $slug_exists = (count(\App\Category::where('slug', '=', $request->input('slug'))->where('company_id', '=', $companyid)->get())  > 0) ? false : true;
             return response()->json($slug_exists);
         }  
     }
@@ -627,7 +628,7 @@ class CategoryController extends Controller
                                             $status=0;
                                         }
 
-                                     $sulg=str_slug($value['name'].'-');
+                                     $sulg=Str::slug($value['name'].'-');
 
                             DB::table('categories')
                                 ->insert([

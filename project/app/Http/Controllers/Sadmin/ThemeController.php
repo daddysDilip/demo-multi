@@ -13,6 +13,7 @@ use File;
 use URL;
 use Carbon\Carbon; 
 use Auth;
+use Illuminate\Support\Str;
 
 class ThemeController extends Controller
 {
@@ -77,7 +78,7 @@ class ThemeController extends Controller
         {
             $theme['paid'] = 1;
         }
-        $theme['foldername'] = str_slug($theme['themename'], '-'); 
+        $theme['foldername'] = Str::slug($theme['themename'], '-'); 
 
         $theme->save();
         $themeid = $theme->id;
@@ -237,12 +238,12 @@ class ThemeController extends Controller
 
         if($id != '')
         {
-            $title_exists = (count(\App\Themes::where('id', '!=', $id)->where('themeurl', '=', $request->input('themeurl'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\Themes::where('id', '!=', $id)->where('themeurl', '=', $request->input('themeurl'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\Themes::where('themeurl', '=', $request->input('themeurl'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\Themes::where('themeurl', '=', $request->input('themeurl'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }  
     }

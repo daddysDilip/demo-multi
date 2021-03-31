@@ -126,7 +126,7 @@ class SettingsController extends Controller
 
         $settingdeflang_exists = SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->first();
 
-        if(count($settingdeflang_exists) > 0)
+        if($settingdeflang_exists != null)
         {
             SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->update(['title' => $request->title, 'popular_tags' => $request->popular_tags, 'currency_sign' => $request->currency_sign]);
         }
@@ -147,7 +147,7 @@ class SettingsController extends Controller
         {
             $settinglang_exists = SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->first();
             
-            if(count($settinglang_exists) > 0)
+            if($settinglang_exists > null)
             {
                 SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->update(['title' => $request->trans_title[$data], 'popular_tags' => $request->trans_popular_tags[$data], 'currency_sign' => $request->trans_currency_sign[$data]]);
             }
@@ -241,7 +241,7 @@ class SettingsController extends Controller
 
         $pagedeflang_exists = SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->first();
 
-        if(count($pagedeflang_exists) > 0)
+        if($pagedeflang_exists != null)
         {
             SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->update(['about' => $request->about]);
         }
@@ -260,7 +260,7 @@ class SettingsController extends Controller
         {
             $pagelang_exists = SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->first();
             
-            if(count($pagelang_exists) > 0)
+            if($pagelang_exists != null)
             {
 
                 SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->update(['about' => $request->trans_about[$data]]);
@@ -294,7 +294,7 @@ class SettingsController extends Controller
 
         $pagedeflang_exists = SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->first();
 
-        if(count($pagedeflang_exists) > 0)
+        if($pagedeflang_exists != null)
         {
             SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->update(['address' => $request->address]);
         }
@@ -313,7 +313,7 @@ class SettingsController extends Controller
         {
             $pagelang_exists = SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->first();
             
-            if(count($pagelang_exists) > 0)
+            if($pagelang_exists != null)
             {
 
                 SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->update(['address' => $request->trans_address[$data]]);
@@ -345,7 +345,7 @@ class SettingsController extends Controller
 
         $pagedeflang_exists = SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->first();
 
-        if(count($pagedeflang_exists) > 0)
+        if($pagedeflang_exists != null)
         {
             SettingsTranslations::where('langcode', '=', $request->default_langcode)->where('settingid', '=', $request->id)->update(['footer' => $request->footer]);
         }
@@ -364,7 +364,7 @@ class SettingsController extends Controller
         {
             $pagelang_exists = SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->first();
             
-            if(count($pagelang_exists) > 0)
+            if($pagelang_exists != null)
             {
 
                 SettingsTranslations::where('langcode', '=', $transdata)->where('settingid', '=', $request->id)->update(['footer' => $request->trans_footer[$data]]);
@@ -464,7 +464,7 @@ class SettingsController extends Controller
 
         $pickupdeflang_exists = PickUpLocationTranslations::where('langcode', '=', $request->default_langcode)->where('plocationgid', '=', $pickl->id)->first();
 
-        if(count($pickupdeflang_exists) > 0)
+        if($pickupdeflang_exists != null)
         {
             PickUpLocationTranslations::where('langcode', '=', $request->default_langcode)->where('plocationgid', '=', $pickl->id)->update(['address' => $request->address]);
         }
@@ -483,7 +483,7 @@ class SettingsController extends Controller
         {
             $pickuplang_exists = PickUpLocationTranslations::where('langcode', '=', $transdata)->where('plocationgid', '=', $pickl->id)->first();
             
-            if(count($pickuplang_exists) > 0)
+            if($pickuplang_exists != null)
             {
 
                 PickUpLocationTranslations::where('langcode', '=', $transdata)->where('plocationgid', '=', $pickl->id)->update(['address' => $request->trans_address[$data]]);

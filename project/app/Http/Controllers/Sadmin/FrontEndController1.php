@@ -33,6 +33,7 @@ use App\Contactus;
 use App\Cms;
 use App\Blog;
 use Mail;
+use Illuminate\Support\Str;
 
 class FrontEndController extends Controller
 {
@@ -123,7 +124,7 @@ class FrontEndController extends Controller
 		
 		$path = $_SERVER['HTTP_HOST'];
 		$company['comapany_name'] = $company['username'];
-		$storename = str_slug($company['username'], '-');
+		$storename = Str::slug($company['username'], '-');
 		$company['username'] = $storename;
 		$name = $company['username'];
 		$company['status'] = 1;
@@ -335,7 +336,7 @@ class FrontEndController extends Controller
 
         $id = $request->input('id');
         $companyid = get_company_id();
-		$storename = str_slug($request->input('username'), '-');
+		$storename = Str::slug($request->input('username'), '-');
 
         if($id != '')
         {

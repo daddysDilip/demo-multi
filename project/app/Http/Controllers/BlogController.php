@@ -11,7 +11,7 @@ use File;
 use URL;
 use Auth;
 use Excel;
-
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -54,7 +54,7 @@ class BlogController extends Controller
         $blog = new Blog();
         $blog->fill($request->all());
 
-        $cslug = str_slug($request->title, '-');
+        $cslug = Str::slug($request->title, '-');
         $slugcheck = Blog::where('slug','=',$cslug)->count();
 
         $slug="";
@@ -180,7 +180,7 @@ class BlogController extends Controller
 
         $blogdeflang_exists = BlogTranslations::where('langcode', '=', $request->default_langcode)->where('blogid', '=', $id)->first();
 
-        if(count($blogdeflang_exists) > 0)
+        if($blogdeflang_exists != null)
         {
             BlogTranslations::where('langcode', '=', $request->default_langcode)->where('blogid', '=', $id)->update(['title' => $request->title, 'details' => $request->details]);
         }
@@ -201,7 +201,7 @@ class BlogController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $bloglang_exists = BlogTranslations::where('langcode', '=', $transdata)->where('blogid', '=', $id)->first();
-            if(count($bloglang_exists) > 0)
+            if($bloglang_exists != null)
             {
 
                 BlogTranslations::where('langcode', '=', $transdata)->where('blogid', '=', $id)->update(['title' => $request->trans_title[$data], 'details' => $request->trans_details[$data]]);
@@ -317,7 +317,7 @@ class BlogController extends Controller
 
             $blogtrans = BlogTranslations::where('blogid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($blogtrans) > 0)
+            if($blogtrans != null)
             {
                 $title = $blogtrans->title;
                 $details = $blogtrans->details;
@@ -378,7 +378,7 @@ class BlogController extends Controller
                 foreach ($dataImported as $value)
                 {         
 
-                    $cslug = str_slug($value['blog_title'], '-');
+                    $cslug = Str::slug($value['blog_title'], '-');
                     $slugcheck = Blog::where('slug','=',$cslug)->count();
 
                     $slug="";
@@ -449,7 +449,7 @@ class BlogController extends Controller
     public function createSlug($title)
     {
         // Normalize the title
-        $slug = str_slug($title);
+        $slug = Str::slug($title);
 
         $allSlugs = Blog::where('slug', 'like', $slug.'%')->count();
 
@@ -548,12 +548,12 @@ class BlogController extends Controller
 
              if($post->featured_image != '')
             {
-            $image= "<img style='width: 300px;height: 100px;' src='".url("/")."/assets/images/blog/".$post->featured_image."'>";
+            $image= "<img style='width: 100px;height: 100px;' src='".url("/")."/assets/images/blog/".$post->featured_image."'>";
               }
                else
                {
         
-                  $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='width: 300px;height: 100px;'>";
+                  $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='100' height='300' style='width: 100px;height: 100px;'>";
               }
                    
 

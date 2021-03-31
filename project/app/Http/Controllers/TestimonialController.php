@@ -72,21 +72,21 @@ class TestimonialController extends Controller
         $testimonialtrans->save();
 
 
-        if($post->image != null)
+        if($request->langcode != null)
         {
 
-        foreach($request->langcode as $data => $transdata)
-        {
-            $testimonialalltrans = new TestimonialTranslations();
-            $testimonialalltrans['testimonialid'] = $testimonial->id;
-            $testimonialalltrans['review'] = $request->trans_review[$data];
-            $testimonialalltrans['designation'] = $request->trans_designation[$data];
-            $testimonialalltrans['langcode'] = $transdata;
-            $testimonialalltrans['company_id'] = get_company_id();
-            $testimonialalltrans->save();    
-            
+            foreach($request->langcode as $data => $transdata)
+            {
+                $testimonialalltrans = new TestimonialTranslations();
+                $testimonialalltrans['testimonialid'] = $testimonial->id;
+                $testimonialalltrans['review'] = $request->trans_review[$data];
+                $testimonialalltrans['designation'] = $request->trans_designation[$data];
+                $testimonialalltrans['langcode'] = $transdata;
+                $testimonialalltrans['company_id'] = get_company_id();
+                $testimonialalltrans->save();    
+                
+            }
         }
-    }
 
         return redirect('admin/testimonial')->with('message',trans("app.TestimonialAddMsg"));
     }
@@ -138,7 +138,7 @@ class TestimonialController extends Controller
 
         $testideflang_exists = TestimonialTranslations::where('langcode', '=', $request->default_langcode)->where('testimonialid', '=', $id)->first();
 
-        if(count($testideflang_exists) > 0)
+        if($testideflang_exists != null)
         {
             TestimonialTranslations::where('langcode', '=', $request->default_langcode)->where('testimonialid', '=', $id)->update(['review' => $request->review, 'designation' => $request->designation]);
         }
@@ -159,7 +159,7 @@ class TestimonialController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $testilang_exists = TestimonialTranslations::where('langcode', '=', $transdata)->where('testimonialid', '=', $id)->first();
-            if(count($testilang_exists) > 0)
+            if($testilang_exists != null)
             {
 
                 TestimonialTranslations::where('langcode', '=', $transdata)->where('testimonialid', '=', $id)->update(['review' => $request->trans_review[$data], 'designation' => $request->trans_designation[$data]]);
@@ -237,7 +237,7 @@ class TestimonialController extends Controller
 
             $testimonialtrans = TestimonialTranslations::where('testimonialid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($testimonialtrans) > 0)
+            if($testimonialtrans != null)
             {
                 $review = $testimonialtrans->review;
                 $designation = $testimonialtrans->designation;
