@@ -12,7 +12,7 @@ use URL;
 use Carbon\Carbon; 
 use Auth;
 use Excel;
-
+use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
@@ -54,7 +54,7 @@ class EventController extends Controller
         $event = new Event();
         $event->fill($request->all());
 
-        $createslug = str_slug($request->eventname, '-');
+        $createslug = Str::slug($request->eventname, '-');
         $slugcheck = Event::where('slug','=',$createslug)->count();
 
         $slug="";
@@ -362,7 +362,7 @@ class EventController extends Controller
             {    
                 $eventdate=date('Y-m-d',strtotime($value['event_date']));
 
-                $createslug = str_slug($value['event_name'], '-');
+                $createslug = Str::slug($value['event_name'], '-');
                 $slugcheck = Event::where('slug','=',$createslug)->count();
 
                 $slug="";

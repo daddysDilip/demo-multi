@@ -11,7 +11,7 @@ use File;
 use URL;
 use Auth;
 use Excel;
-
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -54,7 +54,7 @@ class BlogController extends Controller
         $blog = new Blog();
         $blog->fill($request->all());
 
-        $cslug = str_slug($request->title, '-');
+        $cslug = Str::slug($request->title, '-');
         $slugcheck = Blog::where('slug','=',$cslug)->count();
 
         $slug="";
@@ -378,7 +378,7 @@ class BlogController extends Controller
                 foreach ($dataImported as $value)
                 {         
 
-                    $cslug = str_slug($value['blog_title'], '-');
+                    $cslug = Str::slug($value['blog_title'], '-');
                     $slugcheck = Blog::where('slug','=',$cslug)->count();
 
                     $slug="";
@@ -449,7 +449,7 @@ class BlogController extends Controller
     public function createSlug($title)
     {
         // Normalize the title
-        $slug = str_slug($title);
+        $slug = Str::slug($title);
 
         $allSlugs = Blog::where('slug', 'like', $slug.'%')->count();
 

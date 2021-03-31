@@ -12,6 +12,7 @@ use URL;
 use Carbon\Carbon; 
 use Auth;
 use Excel;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -62,7 +63,7 @@ class NewsController extends Controller
 
         $news['tempcode'] = str_random(6);
 
-        $cslug = str_slug($request->newstitle, '-');
+        $cslug = Str::slug($request->newstitle, '-');
         $slugcheck = News::where('slug','=',$cslug)->count();
 
         $slug="";
@@ -350,7 +351,7 @@ class NewsController extends Controller
 
                 $newsdate=date('Y-m-d',strtotime($value['news_date']));
 
-                $cslug = str_slug($value['news_title'], '-');
+                $cslug = Str::slug($value['news_title'], '-');
                 $slugcheck = News::where('slug','=',$cslug)->count();
 
                 $slug="";

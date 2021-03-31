@@ -13,6 +13,7 @@ use File;
 use URL;
 use Carbon\Carbon; 
 use Auth;
+use Illuminate\Support\Str;
 
 class ThemeController extends Controller
 {
@@ -77,7 +78,7 @@ class ThemeController extends Controller
         {
             $theme['paid'] = 1;
         }
-        $theme['foldername'] = str_slug($theme['themename'], '-'); 
+        $theme['foldername'] = Str::slug($theme['themename'], '-'); 
 
         $theme->save();
         $themeid = $theme->id;

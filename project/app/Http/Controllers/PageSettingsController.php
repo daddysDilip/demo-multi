@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use App\Seosetion;
+use Illuminate\Support\Str;
 
 class PageSettingsController extends Controller
 {
@@ -875,7 +876,7 @@ class PageSettingsController extends Controller
                  $seosetion = new Seosetion();
         $seosetion->fill($request->all());
 
-        $cslug = str_slug($request->metatitle, '-');
+        $cslug = Str::slug($request->metatitle, '-');
         $slugcheck = Seosetion::where('slug','=',$cslug)->count();
 
         $slug="";

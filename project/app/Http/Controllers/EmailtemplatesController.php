@@ -9,6 +9,7 @@ use File;
 use URL;
 use Carbon\Carbon; 
 use Auth;
+use Illuminate\Support\Str;
 
 class EmailtemplatesController extends Controller
 {
@@ -49,7 +50,7 @@ class EmailtemplatesController extends Controller
         $emailtemplates = new Emailtemplates();
         $emailtemplates->fill($request->all());
        
-        $slug = str_slug($emailtemplates['title'], '-');
+        $slug = Str::slug($emailtemplates['title'], '-');
         
 		$emailtemplates['company_id'] = 0;
         $emailtemplates['tempcode'] = str_random(6);

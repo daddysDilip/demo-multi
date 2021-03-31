@@ -10,6 +10,7 @@ use File;
 use URL;
 use Carbon\Carbon; 
 use Auth;
+use Illuminate\Support\Str;
 
 class CmsController extends Controller
 {
@@ -50,7 +51,7 @@ class CmsController extends Controller
         $cms = new Cms();
         $cms->fill($request->all());
 
-        $slug = str_slug($cms['name'], '-');
+        $slug = Str::slug($cms['name'], '-');
         $cms['slug'] = $slug;
         $cms['tempcode'] = str_random(6);
 

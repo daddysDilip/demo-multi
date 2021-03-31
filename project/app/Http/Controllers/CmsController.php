@@ -11,6 +11,7 @@ use URL;
 use Carbon\Carbon; 
 use Auth;
 use Excel;
+use Illuminate\Support\Str;
 
 class CmsController extends Controller
 {
@@ -54,7 +55,7 @@ class CmsController extends Controller
 
         // $slug = str_slug($cms['name'], '-');
 
-        $cslug = str_slug($request->name, '-');
+        $cslug = Str::slug($request->name, '-');
         $slugcheck = Cms::where('slug','=',$cslug)->count();
 
         $slug="";
@@ -350,7 +351,7 @@ class CmsController extends Controller
             foreach ($dataImported as $value)
             {         
 
-                $cslug = str_slug($value['page_name'], '-');
+                $cslug = Str::slug($value['page_name'], '-');
                 $slugcheck = Cms::where('slug','=',$cslug)->count();
 
                 $slug="";

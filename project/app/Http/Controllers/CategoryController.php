@@ -13,6 +13,7 @@ use Auth;
 use DB;
 use Excel;
 use App\ArchiveCategory;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -627,7 +628,7 @@ class CategoryController extends Controller
                                             $status=0;
                                         }
 
-                                     $sulg=str_slug($value['name'].'-');
+                                     $sulg=Str::slug($value['name'].'-');
 
                             DB::table('categories')
                                 ->insert([
