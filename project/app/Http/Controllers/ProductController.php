@@ -583,155 +583,121 @@ class ProductController extends Controller
 
 
 
-     public function allPosts(Request $request)
-    {   
-        $companyid = get_company_id();
-        
-        $columns = array( 
+  public function allPosts(Request $request)
+  {   
+    $companyid = get_company_id();
+      
+    $columns = array( 
+                      0 =>'title',
+                      1 =>'price',
+                      2 =>'category',
+                      3 =>'stock',
+                      4 =>'status',
+                      5 =>'action',
+                       );
 
-                        0 =>'title',
-                        1 =>'price',
-                        2 =>'category',
-                        3 =>'stock',
-                        4 =>'status',
-                        5 =>'action',
-                         );
-  
-        $totalData = Product::where('company_id',$companyid)->count();
-            
-        $totalFiltered = $totalData; 
+    $totalData = Product::where('company_id',$companyid)->count();
+          
+    $totalFiltered = $totalData; 
 
-        $limit = $request->input('length');
-        $start = $request->input('start');
-        $order = $columns[$request->input('order.0.column')];
-        $dir = $request->input('order.0.dir');
+    $limit = $request->input('length');
+    $start = $request->input('start');
+    $order = $columns[$request->input('order.0.column')];
+    $dir = $request->input('order.0.dir');
+
+    if(empty($request->input('search.value')))
+    {            
+      $posts = Product::where('company_id',$companyid)
+                  ->offset($start)
+                   ->limit($limit)
+                   ->orderBy($order,$dir)
+                   ->get();
+    }
+    else {
+      $search = $request->input('search.value'); 
+      
+      $posts =  Product::where('company_id',$companyid)
+                      ->where('id','LIKE',"%{$search}%")
+                      ->orWhere('title', 'LIKE',"%{$search}%")
+                      ->offset($start)
+                      ->limit($limit)
+                      ->orderBy($order,$dir)
+                      ->get();
 
 
-
-        // dd($limit,$start,$order,$dir);
-            
-        if(empty($request->input('search.value')))
-        {            
-            $posts = Product::where('company_id',$companyid)
-                        ->offset($start)
-                         ->limit($limit)
-                         ->orderBy($order,$dir)
-                         ->get();
-
-                         // dd($posts);
+      $totalFiltered = Product::where('company_id',$companyid)
+                      ->orwhere('id','LIKE',"%{$search}%")
+                       ->orWhere('title', 'LIKE',"%{$search}%")
+                       ->count();
+                   // dd($totalFiltered);
+    }
+ 
+    $data = array();
+    if(!empty($posts))
+    { 
+      $i=1;
+      $langcode= get_defaultlanguage();
+      $settings=SettingsTranslations::where('company_id',$companyid)->where('langcode',$langcode)
+              ->get();
+      foreach ($posts as $post)
+      {
+          // pr($post); die;
+        if($post->offer_price != '' && $post->offer_price != 0)
+        {    
+          $price="<strike>".$settings[0]->currency_sign.$post->price."</strike><br/>".$settings[0]->currency_sign.$post->offer_price;
         }
-        else {
-
-            $search = $request->input('search.value'); 
-            // dd($search);
-
-            $posts =  Product::where('company_id',$companyid)
-                            ->where('id','LIKE',"%{$search}%")
-                            ->orWhere('title', 'LIKE',"%{$search}%")
-                            ->offset($start)
-                            ->limit($limit)
-                            ->orderBy($order,$dir)
-                            ->get();
-
-
-            $totalFiltered = Product::where('company_id',$companyid)
-                            ->orwhere('id','LIKE',"%{$search}%")
-                             ->orWhere('title', 'LIKE',"%{$search}%")
-                             ->count();
-                         // dd($totalFiltered);
+        else
+        {
+          $price=$settings[0]->currency_sign.$post->price;                           
         }
-   
-        $data = array();
-        if(!empty($posts))
-        { $i=1;
-            foreach ($posts as $post)
-            {
-                              $langcode= get_defaultlanguage();
-                $settings=SettingsTranslations::where('company_id',$companyid)->where('langcode',$langcode)
-                    ->get();
 
-                   if($post->offer_price != '' && $post->offer_price != 0)
-                   {    
-                      $price="<strike>".$settings[0]->currency_sign.$post->price."</strike><br/>".$settings[0]->currency_sign.$post->offer_price;
-                     
-                   }
-                   else
-                   {
-                       $price=$settings[0]->currency_sign.$post->price;                           
-                     
-                       }
+        $prodect1=\App\Category::where('id',$post->category[0])->first()->name."<br>";
+        if($post->category[1] != "")
+        {
+          $prodect2=\App\Category::where('id',$post->category[1])->first()->name."<br>";
+        }
+        if($post->category[2] != "")
+        {
+          $prodect3=\App\Category::where('id',$post->category[2])->first()->name;
+        }
+                                    
+        $nestedData['title'] =$post->title;
+        $nestedData['price'] =$price;
+        $nestedData['category']=$prodect1.$prodect2.$prodect3;
 
+        if($post->stock != 0)
+        {
+          $nestedData['stock']="<span style='color:green'>"."<b>In Stock (".$post->stock.")</b></span>";
+        }
+        else
+        {
+          $nestedData['stock']="<span style='color:red'>"."Out Of Stock</span>";
 
-                       // dd($price);
-                        $prodect1=\App\Category::where('id',$post->category[0])->first()->name."<br>";
-                if($post->category[1] != "")
-                {
-                
-                $prodect2=\App\Category::where('id',$post->category[1])->first()->name."<br>";
-                }
-                if($post->category[2] != "")
-                {
-                
-                $prodect3=\App\Category::where('id',$post->category[2])->first()->name;
-                }
+        }
+        if($post->status == 1)
+        {
+          $nestedData['status'] = "<a href='".url("admin/products")."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
+        }                   
+        elseif($post->status == 0)
+        {
+          $nestedData['status'] = "<a href='".url("admin/products")."/status/".$post->id."/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
+        }
+        $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='products/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
 
-                            
+        $data[] = $nestedData;
+        $i++;
+      }
+    }          
+    $json_data=array(
+      "draw"            => intval($request->input('draw')),  
+      "recordsTotal"    => intval($totalData),  
+      "recordsFiltered" => intval($totalFiltered), 
+      "data"            => $data   
+        );
 
-
-                                            
-                $nestedData['title'] =$post->title;
-                $nestedData['price'] =$price;
-                $nestedData['category']=$prodect1.$prodect2.$prodect3;
-
-                  
-
-
-                if(count($post->stock) != 0)
-                {
-                $nestedData['stock']="<span style='color:green'>"."<b>In Stock (".$post->stock.")</b></span>";
-                }
-                else
-                {
-                $nestedData['stock']="<span style='color:red'>"."Out Of Stock</span>";
-
-                }
-                
-            
-
-
-                       if($post->status == 1)
-                 {
-                  $nestedData['status'] = "<a href='".url("admin/products")."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
-
-                 }
-                                        
-                elseif($post->status == 0)
-                {
-                      $nestedData['status'] = "<a href='".url("admin/products")."/status/".$post->id."/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
-                   // $nestedData['status'] = <a href="{!! url('sadmin/cms') !!}/status/{{$allcms->id}}/1" class="btn btn-danger btn-xs">Deactive</a>
-
-                }
-                              
-
-$nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='products/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
-
-
-                $data[] = $nestedData;
-                $i++;
-            }
-        }          
-                $json_data=array(
-                  "draw"            => intval($request->input('draw')),  
-                  "recordsTotal"    => intval($totalData),  
-                  "recordsFiltered" => intval($totalFiltered), 
-                  "data"            => $data   
-                    );
-
-        // dd($json_data);
-
-       echo json_encode($json_data,JSON_UNESCAPED_UNICODE );    
-        
-    }   
+    echo json_encode($json_data,JSON_UNESCAPED_UNICODE );    
+      
+  }   
 
 
 }
