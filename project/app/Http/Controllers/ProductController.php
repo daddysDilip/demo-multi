@@ -238,12 +238,12 @@ class ProductController extends Controller
 
         if($id != '')
         {
-            $title_exists = ((\App\Product::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('skucode', '=', $request->input('skucode'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\Product::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('skucode', '=', $request->input('skucode'))->get())  > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\Product::where('skucode', '=', $request->input('skucode'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
+            $title_exists = (count(\App\Product::where('skucode', '=', $request->input('skucode'))->where('company_id', '=', $companyid)->get())  > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }

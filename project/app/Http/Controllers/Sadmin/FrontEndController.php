@@ -415,12 +415,12 @@ class FrontEndController extends Controller
 
         if($id != '')
         {
-             $title_exists = ((\App\User::where('id', '!=', $id)->where('username', '=', $storename)->get()) != null) ? false : true;
+             $title_exists = (count(\App\User::where('id', '!=', $id)->where('username', '=', $storename)->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\User::where('username', '=', $storename)->get()) != null) ? false : true;
+            $title_exists = (count(\App\User::where('username', '=', $storename)->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }
@@ -503,12 +503,12 @@ class FrontEndController extends Controller
 
         if($id != '')
         {
-            $title_exists = ((\App\User::where('id', '!=', $id)->where('email', '=', $request->input('company_email'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\User::where('id', '!=', $id)->where('email', '=', $request->input('company_email'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\User::where('email', '=', $request->input('company_email'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\User::where('email', '=', $request->input('company_email'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }

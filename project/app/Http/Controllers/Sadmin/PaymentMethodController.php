@@ -136,12 +136,12 @@ class PaymentMethodController extends Controller
 
         if($id != '')
         {
-            $title_exists = ((\App\PaymentMethod::where('id', '!=', $id)->where('paymentname', '=', $request->input('paymentname'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\PaymentMethod::where('id', '!=', $id)->where('paymentname', '=', $request->input('paymentname'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\PaymentMethod::where('paymentname', '=', $request->input('paymentname'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\PaymentMethod::where('paymentname', '=', $request->input('paymentname'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }

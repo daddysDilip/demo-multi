@@ -491,7 +491,7 @@ class SliderController extends Controller
 
              if($post->image != null)
             {
-          $image= "<img style='width: 300px;height: 100px;' src='".url("/")."/assets/images/sliders/".$post->image."'>";
+          $image= "<img style='width: 100px;height: 100px;' src='".url("/")."/assets/images/sliders/".$post->image."'>";
               }
                else
                {      

@@ -72,21 +72,21 @@ class TestimonialController extends Controller
         $testimonialtrans->save();
 
 
-        if($post->image != null)
+        if($request->langcode != null)
         {
 
-        foreach($request->langcode as $data => $transdata)
-        {
-            $testimonialalltrans = new TestimonialTranslations();
-            $testimonialalltrans['testimonialid'] = $testimonial->id;
-            $testimonialalltrans['review'] = $request->trans_review[$data];
-            $testimonialalltrans['designation'] = $request->trans_designation[$data];
-            $testimonialalltrans['langcode'] = $transdata;
-            $testimonialalltrans['company_id'] = get_company_id();
-            $testimonialalltrans->save();    
-            
+            foreach($request->langcode as $data => $transdata)
+            {
+                $testimonialalltrans = new TestimonialTranslations();
+                $testimonialalltrans['testimonialid'] = $testimonial->id;
+                $testimonialalltrans['review'] = $request->trans_review[$data];
+                $testimonialalltrans['designation'] = $request->trans_designation[$data];
+                $testimonialalltrans['langcode'] = $transdata;
+                $testimonialalltrans['company_id'] = get_company_id();
+                $testimonialalltrans->save();    
+                
+            }
         }
-    }
 
         return redirect('admin/testimonial')->with('message',trans("app.TestimonialAddMsg"));
     }

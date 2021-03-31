@@ -175,12 +175,12 @@ class LanguageController extends Controller
 
         if($id != '')
         {
-            $title_exists = ((\App\Language::where('id', '!=', $id)->where('name', '=', $request->input('name'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\Language::where('id', '!=', $id)->where('name', '=', $request->input('name'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\Language::where('name', '=', $request->input('name'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\Language::where('name', '=', $request->input('name'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }
@@ -193,12 +193,12 @@ class LanguageController extends Controller
 
         if($id != '')
         {
-            $code_exists = ((\App\Language::where('id', '!=', $id)->where('code', '=', $request->input('code'))->get()) != null) ? false : true;
+            $code_exists = (count(\App\Language::where('id', '!=', $id)->where('code', '=', $request->input('code'))->get()) > 0) ? false : true;
             return response()->json($code_exists);
         }
         else
         {
-            $code_exists = ((\App\Language::where('code', '=', $request->input('code'))->get()) != null) ? false : true;
+            $code_exists = (count(\App\Language::where('code', '=', $request->input('code'))->get()) > 0) ? false : true;
             return response()->json($code_exists);
         }  
     }

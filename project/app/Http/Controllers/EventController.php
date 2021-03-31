@@ -420,28 +420,20 @@ class EventController extends Controller
         $companyid = get_company_id();
         
         $columns = array( 
-                          
-
-
-                        0 =>'eventimage',
-                        1 =>'eventname',
-                        2 =>'eventdate',
-                        3 =>'status',
-                        4 =>'action',
-                         );
+                0 =>'eventimage',
+                1 =>'eventname',
+                2 =>'eventdate',
+                3 =>'status',
+                4 =>'action',
+            );
   
         $totalData = Event::where('company_id',$companyid)->count();
             
         $totalFiltered = $totalData; 
-
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
-
-
-
-        // dd($limit,$start,$order,$dir);
             
         if(empty($request->input('search.value')))
         {            
@@ -450,14 +442,10 @@ class EventController extends Controller
                          ->limit($limit)
                          ->orderBy($order,$dir)
                          ->get();
-
-                         // dd($posts);
         }
         else {
-
             $search = $request->input('search.value'); 
             // dd($search);
-
             $posts =  Event::where('company_id',$companyid)
                             ->where('id','LIKE',"%{$search}%")
                             ->orWhere('eventname', 'LIKE',"%{$search}%")
@@ -467,13 +455,11 @@ class EventController extends Controller
                             ->orderBy($order,$dir)
                             ->get();
 
-
             $totalFiltered = Event::where('company_id',$companyid)
                             ->orwhere('id','LIKE',"%{$search}%")
                              ->orWhere('eventname', 'LIKE',"%{$search}%")
                             ->orWhere('eventdate', 'LIKE',"%{$search}%")
                             ->count();
-                         // dd($totalFiltered);
         }
    
         $data = array();
@@ -482,34 +468,29 @@ class EventController extends Controller
             foreach ($posts as $post)
             {
 
-            // $etitle=EventTranslations::where('eventid',$post->id)->where('langcode',app()->getLocale() )->first()->eventname;
-
-             if($post->eventimage != '')
-            {
-        $image= "<img style='width: 300px;height: 100px;' src='".url("/")."/assets/images/event/".$post->eventimage."'>";
-              }
-               else
-               {
-        
-        $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='width: 300px;height: 100px;'>";
-              }
+                if($post->eventimage != '')
+                {
+                    $image= "<img style='width: 100px;height: 100px;' src='".url("/")."/assets/images/event/".$post->eventimage."'>";
+                }
+                else
+                {
+                    $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='100' height='100' style='width: 100px;height: 100px;'>";
+                }
                    
-                  
                 $nestedData['eventimage'] =$image;
                 $nestedData['eventname'] =$post->eventname;
                 $nestedData['eventdate']= date('jS M Y',strtotime($post->eventdate));
 
-                       if($post->status == 1)
-                 {
-                  $nestedData['status'] = "<a href='".url('admin/event')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
-
-                 }                                       
+                if($post->status == 1)
+                {
+                    $nestedData['status'] = "<a href='".url('admin/event')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
+                }                                       
                 elseif($post->status == 0)
                 {
                       $nestedData['status'] = "<a href='".url('admin/event')."/status/$post->id}}/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
                 }
                               
-$nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='event/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
+                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='event/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
 
                 $data[] = $nestedData;
                 $i++;
@@ -521,8 +502,6 @@ $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;
                   "recordsFiltered" => intval($totalFiltered), 
                   "data"            => $data   
                     );
-
-        // dd($json_data);
 
        echo json_encode($json_data,JSON_UNESCAPED_UNICODE ); 
         

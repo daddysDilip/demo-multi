@@ -241,12 +241,12 @@ class BlogController extends Controller
 
         if($id != '')
         {
-            $title_exists = (\App\Blog::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('title', '=', $request->input('title'))->get() != null) ? false : true;
+            $title_exists = (count(\App\Blog::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('title', '=', $request->input('title'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\Blog::where('title', '=', $request->input('title'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
+            $title_exists = (count(\App\Blog::where('title', '=', $request->input('title'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }
@@ -548,12 +548,12 @@ class BlogController extends Controller
 
              if($post->featured_image != '')
             {
-            $image= "<img style='width: 300px;height: 100px;' src='".url("/")."/assets/images/blog/".$post->featured_image."'>";
+            $image= "<img style='width: 100px;height: 100px;' src='".url("/")."/assets/images/blog/".$post->featured_image."'>";
               }
                else
                {
         
-                  $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='width: 300px;height: 100px;'>";
+                  $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='100' height='300' style='width: 100px;height: 100px;'>";
               }
                    
 

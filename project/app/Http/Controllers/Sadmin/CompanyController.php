@@ -447,12 +447,12 @@ class CompanyController extends Controller
 
         if($id != '')
         {
-             $title_exists = ((\App\User::where('id', '!=', $id)->where('email', '=', $request->input('company_email'))->get()) != null) ? false : true;
+             $title_exists = (count(\App\User::where('id', '!=', $id)->where('email', '=', $request->input('company_email'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\User::where('email', '=', $request->input('company_email'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\User::where('email', '=', $request->input('company_email'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }
@@ -464,12 +464,12 @@ class CompanyController extends Controller
 
         if($id != '')
         {
-             $title_exists = ((\App\User::where('id', '!=', $id)->where('username', '=', $request->input('username'))->get()) != null) ? false : true;
+             $title_exists = (count(\App\User::where('id', '!=', $id)->where('username', '=', $request->input('username'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\User::where('username', '=', $request->input('username'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\User::where('username', '=', $request->input('username'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }

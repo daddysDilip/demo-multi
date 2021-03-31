@@ -150,12 +150,12 @@ class CityController extends Controller
         {
             if($id != '')
             {
-                $name_exists = ((\App\City::where('id', '!=', $id)->where('stateid', '=', $stateid)->where('cityname', '=', $request->input('cityname'))->get()) != null) ? false : true;
+                $name_exists = (count(\App\City::where('id', '!=', $id)->where('stateid', '=', $stateid)->where('cityname', '=', $request->input('cityname'))->get())  > 0) ? false : true;
                 return response()->json($name_exists);
             }
             else
             {
-                $name_exists = ((\App\City::where('stateid', '=', $stateid)->where('cityname', '=', $request->input('cityname'))->get()) != null) ? false : true;
+                $name_exists = (count(\App\City::where('stateid', '=', $stateid)->where('cityname', '=', $request->input('cityname'))->get())  > 0) ? false : true;
                 return response()->json($name_exists);
             }  
         } 

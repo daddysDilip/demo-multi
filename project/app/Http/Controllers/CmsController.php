@@ -238,12 +238,12 @@ class CmsController extends Controller
 
         if($id != '')
         {
-             $title_exists = ((\App\Cms::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('name', '=', $request->input('name'))->get()) != null) ? false : true;
+             $title_exists = (count(\App\Cms::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('name', '=', $request->input('name'))->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\Cms::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
+            $title_exists = (count(\App\Cms::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }

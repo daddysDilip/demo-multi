@@ -399,12 +399,12 @@ class PageSettingsController extends Controller
 
         if($id != '')
         {
-            $title_exists = ((\App\FAQ::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('question', '=', $request->input('question'))->get()) != null) ? false : true;
+            $title_exists = (count(\App\FAQ::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('question', '=', $request->input('question'))->get())  > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\FAQ::where('question', '=', $request->input('question'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
+            $title_exists = (count(\App\FAQ::where('question', '=', $request->input('question'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }
