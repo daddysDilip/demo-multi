@@ -1,6 +1,20 @@
 {
     "packages": [
         {
+<<<<<<< HEAD
+            "name": "barryvdh/laravel-dompdf",
+            "version": "v0.8.2",
+            "version_normalized": "0.8.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-dompdf.git",
+                "reference": "7dcdecfa125c174d0abe723603633dc2756ea3af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/7dcdecfa125c174d0abe723603633dc2756ea3af",
+                "reference": "7dcdecfa125c174d0abe723603633dc2756ea3af",
+=======
 <<<<<<< Updated upstream
             "name": "doctrine/instantiator",
             "version": "1.4.0",
@@ -47,14 +61,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/30310e0a675462bf2aa9d448c8dcbf57fbcc517d",
                 "reference": "30310e0a675462bf2aa9d448c8dcbf57fbcc517d",
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 "shasum": ""
             },
             "require": {
                 "dompdf/dompdf": "^0.8",
+<<<<<<< HEAD
+                "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x|5.5.x|5.6.x",
+                "php": ">=5.5.9"
+            },
+            "time": "2018-02-07T17:43:25+00:00",
+=======
                 "illuminate/support": "^5.5|^6|^7|^8",
                 "php": ">=7"
             },
             "time": "2020-09-07T11:50:18+00:00",
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -73,7 +95,10 @@
             "autoload": {
                 "psr-4": {
                     "Barryvdh\\DomPDF\\": "src"
+<<<<<<< HEAD
+=======
 >>>>>>> Stashed changes
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -82,6 +107,53 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "A DOMPDF Wrapper for Laravel",
+            "keywords": [
+                "dompdf",
+                "laravel",
+                "pdf"
+            ],
+            "install-path": "../barryvdh/laravel-dompdf"
+        },
+        {
+            "name": "doctrine/inflector",
+            "version": "v1.1.0",
+            "version_normalized": "1.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/inflector.git",
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "time": "2015-11-06T14:35:42+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Common\\Inflector\\": "lib/"
+                }
+=======
 <<<<<<< Updated upstream
                     "name": "Marco Pivetta",
                     "email": "ocramius@gmail.com",
@@ -150,11 +222,78 @@
                 "files": [
                     "src/DeepCopy/deep_copy.php"
                 ]
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
+<<<<<<< HEAD
+            "authors": [
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Common String Manipulations with regard to casing and singular/plural rules.",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "inflection",
+                "pluralize",
+                "singularize",
+                "string"
+            ],
+            "install-path": "../doctrine/inflector"
+        },
+        {
+            "name": "dompdf/dompdf",
+            "version": "v0.8.2",
+            "version_normalized": "0.8.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/dompdf.git",
+                "reference": "5113accd9ae5d466077cce5208dcf3fb871bf8f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/5113accd9ae5d466077cce5208dcf3fb871bf8f6",
+                "reference": "5113accd9ae5d466077cce5208dcf3fb871bf8f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "phenx/php-font-lib": "0.5.*",
+                "phenx/php-svg-lib": "0.3.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "time": "2017-11-26T14:49:08+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+=======
             "description": "Create deep copies (clones) of your objects",
             "keywords": [
                 "clone",
@@ -252,17 +391,128 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 }
             },
             "installation-source": "dist",
             "autoload": {
+<<<<<<< HEAD
+                "psr-4": {
+                    "Dompdf\\": "src/"
+                },
+                "classmap": [
+                    "lib/"
+=======
 <<<<<<< Updated upstream
                 "classmap": [
                     "src/"
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
+<<<<<<< HEAD
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                },
+                {
+                    "name": "Brian Sweeney",
+                    "email": "eclecticgeek@gmail.com"
+                },
+                {
+                    "name": "Gabriel Bull",
+                    "email": "me@gabrielbull.com"
+                }
+            ],
+            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
+            "homepage": "https://github.com/dompdf/dompdf",
+            "install-path": "../dompdf/dompdf"
+        },
+        {
+            "name": "illuminate/contracts",
+            "version": "v5.4.36",
+            "version_normalized": "5.4.36.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/contracts.git",
+                "reference": "67f642e018f3e95fb0b2ebffc206c3200391b1ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/67f642e018f3e95fb0b2ebffc206c3200391b1ab",
+                "reference": "67f642e018f3e95fb0b2ebffc206c3200391b1ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "time": "2017-08-26T23:56:53+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Contracts\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Contracts package.",
+            "homepage": "https://laravel.com",
+            "install-path": "../illuminate/contracts"
+        },
+        {
+            "name": "illuminate/support",
+            "version": "v5.4.36",
+            "version_normalized": "5.4.36.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/support.git",
+                "reference": "feab1d1495fd6d38970bd6c83586ba2ace8f299a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/feab1d1495fd6d38970bd6c83586ba2ace8f299a",
+                "reference": "feab1d1495fd6d38970bd6c83586ba2ace8f299a",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/inflector": "~1.1",
+                "ext-mbstring": "*",
+                "illuminate/contracts": "5.4.*",
+                "paragonie/random_compat": "~1.4|~2.0",
+                "php": ">=5.6.4"
+            },
+            "replace": {
+                "tightenco/collect": "self.version"
+            },
+            "suggest": {
+                "illuminate/filesystem": "Required to use the composer class (5.2.*).",
+                "symfony/process": "Required to use the composer class (~3.2).",
+                "symfony/var-dumper": "Required to use the dd function (~3.2)."
+            },
+            "time": "2017-08-15T13:25:41+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+=======
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -366,13 +616,22 @@
             "extra": {
                 "branch-alias": {
                     "dev-2.x": "2.x-dev"
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 }
             },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
+<<<<<<< HEAD
+                    "Illuminate\\Support\\": ""
+                },
+                "files": [
+                    "helpers.php"
+                ]
+=======
                     "phpDocumentor\\Reflection\\": "src/"
                 }
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -380,6 +639,47 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Support package.",
+            "homepage": "https://laravel.com",
+            "install-path": "../illuminate/support"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.17",
+            "version_normalized": "2.0.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "time": "2018-07-04T16:31:37+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+=======
                     "name": "Jaap van Otterdijk",
                     "email": "opensource@ijaap.nl"
                 }
@@ -436,6 +736,7 @@
                 "psr-4": {
                     "phpDocumentor\\Reflection\\": "src"
                 }
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -443,6 +744,46 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "install-path": "../paragonie/random_compat"
+        },
+        {
+            "name": "phenx/php-font-lib",
+            "version": "0.5.1",
+            "version_normalized": "0.5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PhenX/php-font-lib.git",
+                "reference": "760148820110a1ae0936e5cc35851e25a938bc97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/760148820110a1ae0936e5cc35851e25a938bc97",
+                "reference": "760148820110a1ae0936e5cc35851e25a938bc97",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "time": "2017-09-13T16:14:37+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "FontLib\\": "src/FontLib"
+=======
                     "name": "Mike van Riel",
                     "email": "me@mikevanriel.com"
                 },
@@ -491,10 +832,52 @@
             "autoload": {
                 "psr-4": {
                     "phpDocumentor\\Reflection\\": "src"
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
+<<<<<<< HEAD
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse, export and make subsets of different types of font files.",
+            "homepage": "https://github.com/PhenX/php-font-lib",
+            "install-path": "../phenx/php-font-lib"
+        },
+        {
+            "name": "phenx/php-svg-lib",
+            "version": "v0.3.2",
+            "version_normalized": "0.3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PhenX/php-svg-lib.git",
+                "reference": "ccc46ef6340d4b8a4a68047e68d8501ea961442c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PhenX/php-svg-lib/zipball/ccc46ef6340d4b8a4a68047e68d8501ea961442c",
+                "reference": "ccc46ef6340d4b8a4a68047e68d8501ea961442c",
+                "shasum": ""
+            },
+            "require": {
+                "sabberworm/php-css-parser": "8.1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "time": "2018-06-03T10:10:03+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Svg\\": "src/"
+=======
                 "MIT"
             ],
             "authors": [
@@ -547,10 +930,52 @@
             "autoload": {
                 "psr-4": {
                     "Prophecy\\": "src/Prophecy"
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
+<<<<<<< HEAD
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse and export to PDF SVG files.",
+            "homepage": "https://github.com/PhenX/php-svg-lib",
+            "install-path": "../phenx/php-svg-lib"
+        },
+        {
+            "name": "sabberworm/php-css-parser",
+            "version": "8.1.0",
+            "version_normalized": "8.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
+                "reference": "850cbbcbe7fbb155387a151ea562897a67e242ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/850cbbcbe7fbb155387a151ea562897a67e242ef",
+                "reference": "850cbbcbe7fbb155387a151ea562897a67e242ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "time": "2016-07-19T19:14:21+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Sabberworm\\CSS": "lib/"
+=======
                 "MIT"
             ],
             "authors": [
@@ -596,6 +1021,7 @@
 =======
                 "psr-4": {
                     "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -604,6 +1030,19 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
+                    "name": "Raphael Schweikert"
+                }
+            ],
+            "description": "Parser for CSS Files written in PHP",
+            "homepage": "http://www.sabberworm.com/blog/2010/6/10/php-css-parser",
+            "keywords": [
+                "css",
+                "parser",
+                "stylesheet"
+            ],
+            "install-path": "../sabberworm/php-css-parser"
+=======
                     "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@gmail.com"
                 },
@@ -2535,6 +2974,7 @@
             },
             "install-path": "../sabberworm/php-css-parser"
 >>>>>>> Stashed changes
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2881,6 +3321,8 @@
                 }
             ],
             "install-path": "../symfony/translation-contracts"
+<<<<<<< HEAD
+=======
         },
         {
 <<<<<<< Updated upstream
@@ -3101,9 +3543,13 @@
                 }
             ],
             "install-path": "../voku/portable-ascii"
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
         }
     ],
     "dev": true,
     "dev-package-names": []
+<<<<<<< HEAD
+=======
 >>>>>>> Stashed changes
+>>>>>>> 9f79fd9412dc40a4f541d96428fc9a1786f2d0e7
 }

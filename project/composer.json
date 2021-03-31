@@ -6,17 +6,17 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
+        "barryvdh/laravel-dompdf": "^0.8.2",
+        "cartalyst/stripe-laravel": "13.0.*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "barryvdh/laravel-dompdf": "^0.8.2",
-        "cartalyst/stripe-laravel": "13.0.*",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.2",
         "maatwebsite/excel": "^3.1",
         "razorpay/razorpay": "^2.5",
-        "laravel/ui": "^3.2",
-        "symfony/translation": "^5.0"
+        "symfony/translation": "^5.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
