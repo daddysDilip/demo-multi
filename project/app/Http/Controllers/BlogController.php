@@ -180,7 +180,7 @@ class BlogController extends Controller
 
         $blogdeflang_exists = BlogTranslations::where('langcode', '=', $request->default_langcode)->where('blogid', '=', $id)->first();
 
-        if(count($blogdeflang_exists) > 0)
+        if($blogdeflang_exists != null)
         {
             BlogTranslations::where('langcode', '=', $request->default_langcode)->where('blogid', '=', $id)->update(['title' => $request->title, 'details' => $request->details]);
         }
@@ -201,7 +201,7 @@ class BlogController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $bloglang_exists = BlogTranslations::where('langcode', '=', $transdata)->where('blogid', '=', $id)->first();
-            if(count($bloglang_exists) > 0)
+            if($bloglang_exists != null)
             {
 
                 BlogTranslations::where('langcode', '=', $transdata)->where('blogid', '=', $id)->update(['title' => $request->trans_title[$data], 'details' => $request->trans_details[$data]]);
@@ -241,12 +241,12 @@ class BlogController extends Controller
 
         if($id != '')
         {
-            $title_exists = (count(\App\Blog::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('title', '=', $request->input('title'))->get()) > 0) ? false : true;
+            $title_exists = (\App\Blog::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('title', '=', $request->input('title'))->get() != null) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\Blog::where('title', '=', $request->input('title'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+            $title_exists = ((\App\Blog::where('title', '=', $request->input('title'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
             return response()->json($title_exists);
         }  
     }
@@ -317,7 +317,7 @@ class BlogController extends Controller
 
             $blogtrans = BlogTranslations::where('blogid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($blogtrans) > 0)
+            if($blogtrans != null)
             {
                 $title = $blogtrans->title;
                 $details = $blogtrans->details;

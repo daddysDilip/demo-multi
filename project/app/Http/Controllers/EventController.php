@@ -188,7 +188,7 @@ class EventController extends Controller
 
         $eventdeflang_exists = EventTranslations::where('langcode', '=', $request->default_langcode)->where('eventid', '=', $id)->first();
 
-        if(count($eventdeflang_exists) > 0)
+        if($eventdeflang_exists != null)
         {
             EventTranslations::where('langcode', '=', $request->default_langcode)->where('eventid', '=', $id)->update(['eventname' => $request->eventname, 'description' => $request->description]);
         }
@@ -210,7 +210,7 @@ class EventController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $eventlang_exists = EventTranslations::where('langcode', '=', $transdata)->where('eventid', '=', $id)->first();
-            if(count($eventlang_exists) > 0)
+            if($eventlang_exists != null)
             {
 
                 EventTranslations::where('langcode', '=', $transdata)->where('eventid', '=', $id)->update(['eventname' => $request->trans_eventname[$data], 'description' => $request->trans_description[$data]]);
@@ -310,7 +310,7 @@ class EventController extends Controller
 
             $eventtrans = EventTranslations::where('eventid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($eventtrans) > 0)
+            if($eventtrans != null)
             {
                 $eventname = $eventtrans->eventname;
                 $description = $eventtrans->description;

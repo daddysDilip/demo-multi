@@ -122,12 +122,12 @@ class CountryController extends Controller
 
         if($id != '')
         {
-             $name_exists = (count(\App\Country::where('id', '!=', $id)->where('countryname', '=', $request->input('countryname'))->get()) > 0) ? false : true;
+             $name_exists = ((\App\Country::where('id', '!=', $id)->where('countryname', '=', $request->input('countryname'))->get()) != null) ? false : true;
             return response()->json($name_exists);
         }
         else
         {
-            $name_exists = (count(\App\Country::where('countryname', '=', $request->input('countryname'))->get()) > 0) ? false : true;
+            $name_exists = ((\App\Country::where('countryname', '=', $request->input('countryname'))->get()) != null) ? false : true;
             return response()->json($name_exists);
         }  
     }
@@ -138,12 +138,12 @@ class CountryController extends Controller
 
         if($id != '')
         {
-             $name_exists = (count(\App\Country::where('id', '!=', $id)->where('sortname', '=', $request->input('sortname'))->get()) > 0) ? false : true;
+             $name_exists = ((\App\Country::where('id', '!=', $id)->where('sortname', '=', $request->input('sortname'))->get()) != null) ? false : true;
             return response()->json($name_exists);
         }
         else
         {
-            $title_exists = (count(\App\Country::where('sortname', '=', $request->input('sortname'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\Country::where('sortname', '=', $request->input('sortname'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }  
     }

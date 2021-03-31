@@ -177,12 +177,12 @@ class RolesController extends Controller
 
         if($id != '')
         {
-             $role_exists = (count(\App\Roles::where('id', '!=', $id)->where('role', '=', $request->input('role'))->where('company_id',$companyid)->get()) > 0) ? false : true;
+             $role_exists = ((\App\Roles::where('id', '!=', $id)->where('role', '=', $request->input('role'))->where('company_id',$companyid)->get()) != null) ? false : true;
             return response()->json($role_exists);
         }
         else
         {
-            $role_exists = (count(\App\Roles::where('role', '=', $request->input('role'))->where('company_id',$companyid)->get()) > 0) ? false : true;
+            $role_exists = ((\App\Roles::where('role', '=', $request->input('role'))->where('company_id',$companyid)->get()) != null) ? false : true;
             return response()->json($role_exists);
         }  
     }

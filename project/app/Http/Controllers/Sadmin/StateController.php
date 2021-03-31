@@ -138,12 +138,12 @@ class StateController extends Controller
         {
             if($id != '')
             {
-                $name_exists = (count(\App\State::where('id', '!=', $id)->where('countryid', '=', $countryid)->where('statename', '=', $request->input('statename'))->get()) > 0) ? false : true;
+                $name_exists = ((\App\State::where('id', '!=', $id)->where('countryid', '=', $countryid)->where('statename', '=', $request->input('statename'))->get()) != null) ? false : true;
                 return response()->json($name_exists);
             }
             else
             {
-                $name_exists = (count(\App\State::where('countryid', '=', $countryid)->where('statename', '=', $request->input('statename'))->get()) > 0) ? false : true;
+                $name_exists = ((\App\State::where('countryid', '=', $countryid)->where('statename', '=', $request->input('statename'))->get()) != null) ? false : true;
                 return response()->json($name_exists);
             }
         }

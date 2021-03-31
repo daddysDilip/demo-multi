@@ -169,7 +169,7 @@ class CmsController extends Controller
 
         $cmsdeflang_exists = CmsTranslations::where('langcode', '=', $request->default_langcode)->where('cmsid', '=', $id)->first();
 
-        if(count($cmsdeflang_exists) > 0)
+        if($cmsdeflang_exists != null)
         {
             CmsTranslations::where('langcode', '=', $request->default_langcode)->where('cmsid', '=', $id)->update(['name' => $request->name, 'title' => $request->title, 'description' => $request->description, 'metatitle' => $request->metatitle, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords]);
         }
@@ -194,7 +194,7 @@ class CmsController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $cmslang_exists = CmsTranslations::where('langcode', '=', $transdata)->where('cmsid', '=', $id)->first();
-            if(count($cmslang_exists) > 0)
+            if($cmslang_exists != null)
             {
 
                 CmsTranslations::where('langcode', '=', $transdata)->where('cmsid', '=', $id)->update(['name' => $request->trans_name[$data], 'title' => $request->trans_title[$data], 'description' => $request->trans_description[$data], 'metatitle' => $request->trans_metatitle[$data], 'metadescription' => $request->trans_metadescription[$data], 'metakeywords' => $request->trans_metakeywords[$data]]);
@@ -238,12 +238,12 @@ class CmsController extends Controller
 
         if($id != '')
         {
-             $title_exists = (count(\App\Cms::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('name', '=', $request->input('name'))->get()) > 0) ? false : true;
+             $title_exists = ((\App\Cms::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('name', '=', $request->input('name'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\Cms::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+            $title_exists = ((\App\Cms::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
             return response()->json($title_exists);
         }  
     }
@@ -297,7 +297,7 @@ class CmsController extends Controller
 
             $cmstrans = CmsTranslations::where('cmsid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($cmstrans) > 0)
+            if($cmstrans != null)
             {
                 $name = $cmstrans->name;
                 $title = $cmstrans->title;

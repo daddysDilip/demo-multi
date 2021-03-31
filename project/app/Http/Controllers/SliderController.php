@@ -193,7 +193,7 @@ class SliderController extends Controller
 
         $sliderdeflang_exists = SliderTranslations::where('langcode', '=', $request->default_langcode)->where('sliderid', '=', $id)->first();
 
-        if(count($sliderdeflang_exists) > 0)
+        if($sliderdeflang_exists != null)
         {
             SliderTranslations::where('langcode', '=', $request->default_langcode)->where('sliderid', '=', $id)->update(['title' => $request->title, 'text' => $request->text]);
         }
@@ -212,7 +212,7 @@ class SliderController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $sliderlang_exists = SliderTranslations::where('langcode', '=', $transdata)->where('sliderid', '=', $id)->first();
-            if(count($sliderlang_exists) > 0)
+            if($sliderlang_exists != null)
             {
 
                 SliderTranslations::where('langcode', '=', $transdata)->where('sliderid', '=', $id)->update(['title' => $request->trans_title[$data], 'text' => $request->trans_text[$data]]);
@@ -311,7 +311,7 @@ class SliderController extends Controller
 
             $slidertrans = SliderTranslations::where('sliderid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($slidertrans) > 0)
+            if($slidertrans != null)
             {
                 $title = $slidertrans->title;
                 $text = $slidertrans->text;

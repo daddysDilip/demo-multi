@@ -1066,7 +1066,7 @@ class FrontEndController extends Controller
 
         $customeraddress = new CustomerAddress;
 
-        if(count($caddress) > 0)
+        if($caddress != null)
         {
             $addressdata = array(
                 'billing_firstname' => $request->customer_firstname,
@@ -1399,7 +1399,7 @@ class FrontEndController extends Controller
 
         $customeraddress = new CustomerAddress;
 
-        if(count($caddress) > 0)
+        if($caddress != null)
         {
             $addressdata = array(
                 'billing_firstname' => $request->customer_firstname,

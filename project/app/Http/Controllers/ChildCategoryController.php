@@ -246,7 +246,7 @@ class ChildCategoryController extends Controller
 
         $categorydeflang_exists = CategoryTranslations::where('langcode', '=', $request->default_langcode)->where('categoryid', '=', $id)->first();
 
-        if(count($categorydeflang_exists) > 0)
+        if($categorydeflang_exists != null)
         {
             CategoryTranslations::where('langcode', '=', $request->default_langcode)->where('categoryid', '=', $id)->update(['name' => $request->name]);
         }
@@ -267,7 +267,7 @@ class ChildCategoryController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $categorylang_exists = CategoryTranslations::where('langcode', '=', $transdata)->where('categoryid', '=', $id)->first();
-            if(count($categorylang_exists) > 0)
+            if($categorylang_exists != null)
             {
 
                 CategoryTranslations::where('langcode', '=', $transdata)->where('categoryid', '=', $id)->update(['name' => $request->trans_name[$data]]);
@@ -295,7 +295,7 @@ class ChildCategoryController extends Controller
         $childcats = Category::where('subid', $id)->where('role', 'child')->where('company_id',$companyid)->where('status',1)->get();
 
 
-        if(count($childcats) > 0)
+        if($childcats != null)
         {
 
             return response()->json(['response' => $childcats]);

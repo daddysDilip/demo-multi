@@ -175,7 +175,7 @@ class NewsController extends Controller
 
         $newsdeflang_exists = NewsTranslations::where('langcode', '=', $request->default_langcode)->where('newsid', '=', $id)->first();
 
-        if(count($newsdeflang_exists) > 0)
+        if($newsdeflang_exists != null)
         {
             NewsTranslations::where('langcode', '=', $request->default_langcode)->where('newsid', '=', $id)->update(['newstitle' => $request->newstitle, 'content' => $request->content]);
         }
@@ -197,7 +197,7 @@ class NewsController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $newslang_exists = NewsTranslations::where('langcode', '=', $transdata)->where('newsid', '=', $id)->first();
-            if(count($newslang_exists) > 0)
+            if($newslang_exists != null)
             {
 
                 NewsTranslations::where('langcode', '=', $transdata)->where('newsid', '=', $id)->update(['newstitle' => $request->trans_newstitle[$data], 'content' => $request->trans_content[$data]]);
@@ -297,7 +297,7 @@ class NewsController extends Controller
 
             $newstrans = NewsTranslations::where('newsid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($newstrans) > 0)
+            if($newstrans != null)
             {
                 $newstitle = $newstrans->newstitle;
                 $content = $newstrans->content;

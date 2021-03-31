@@ -127,12 +127,12 @@ class PlanController extends Controller
 
         if($id != '')
         {
-             $title_exists = (count(\App\Plans::where('id', '!=', $id)->where('plantype', '=', $request->input('plantype'))->get()) > 0) ? false : true;
+             $title_exists = ((\App\Plans::where('id', '!=', $id)->where('plantype', '=', $request->input('plantype'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\Plans::where('plantype', '=', $request->input('plantype'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\Plans::where('plantype', '=', $request->input('plantype'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }  
     }

@@ -165,13 +165,13 @@ class UserController extends Controller
 
         if($id != '')
         {
-            $email_exists = (count(\App\User::where('id', '!=', $id)->where('email', '=', $request->input('email'))->get()) > 0) ? false : true;
+            $email_exists = ((\App\User::where('id', '!=', $id)->where('email', '=', $request->input('email'))->get()) != null) ? false : true;
             return response()->json($email_exists);
         }
         else
         {
 
-            $email_exists = (count(\App\User::where('email', '=', $request->input('email'))->get()) > 0) ? false : true;
+            $email_exists = ((\App\User::where('email', '=', $request->input('email'))->get()) != null) ? false : true;
             return response()->json($email_exists);
         }  
     }

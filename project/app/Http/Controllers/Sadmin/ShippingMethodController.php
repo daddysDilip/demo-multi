@@ -120,12 +120,12 @@ class ShippingMethodController extends Controller
 
         if($id != '')
         {
-            $title_exists = (count(\App\ShippingMethod::where('id', '!=', $id)->where('shippingtype', '=', $request->input('shippingtype'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\ShippingMethod::where('id', '!=', $id)->where('shippingtype', '=', $request->input('shippingtype'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\ShippingMethod::where('shippingtype', '=', $request->input('shippingtype'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\ShippingMethod::where('shippingtype', '=', $request->input('shippingtype'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }  
     }

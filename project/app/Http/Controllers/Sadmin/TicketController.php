@@ -146,7 +146,7 @@ class TicketController extends Controller
             }
 
             $total = Ticketfiles::where('replyid',$lastid)->get();
-            if(count($total) != '')
+            if($total != null)
             {
                 $reply = TicketReply::findOrFail($lastid);
                 $input = $request['Files'];

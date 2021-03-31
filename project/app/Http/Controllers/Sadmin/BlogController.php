@@ -159,12 +159,12 @@ class BlogController extends Controller
 
         if($id != '')
         {
-            $title_exists = (count(\App\Blog::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('title', '=', $request->input('title'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\Blog::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('title', '=', $request->input('title'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-    $title_exists = (count(\App\Blog::where('title', '=', $request->input('title'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+    $title_exists = ((\App\Blog::where('title', '=', $request->input('title'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
 
             return response()->json($title_exists);
         }  

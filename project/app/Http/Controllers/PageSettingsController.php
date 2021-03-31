@@ -352,7 +352,7 @@ class PageSettingsController extends Controller
 
         $pagedeflang_exists = PageSettingTranslations::where('langcode', '=', $request->default_langcode)->where('pagesettingsid', '=', $input['id'])->first();
 
-        if(count($pagedeflang_exists) > 0)
+        if($pagedeflang_exists != null)
         {
             PageSettingTranslations::where('langcode', '=', $request->default_langcode)->where('pagesettingsid', '=', $input['id'])->update(['contact' => $request->contact]);
         }
@@ -371,7 +371,7 @@ class PageSettingsController extends Controller
         {
             $pagelang_exists = PageSettingTranslations::where('langcode', '=', $transdata)->where('pagesettingsid', '=', $input['id'])->first();
             
-            if(count($pagelang_exists) > 0)
+            if($pagelang_exists != null)
             {
 
                 PageSettingTranslations::where('langcode', '=', $transdata)->where('pagesettingsid', '=', $input['id'])->update(['contact' => $request->trans_contact[$data]]);
@@ -399,12 +399,12 @@ class PageSettingsController extends Controller
 
         if($id != '')
         {
-            $title_exists = (count(\App\FAQ::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('question', '=', $request->input('question'))->get()) > 0) ? false : true;
+            $title_exists = ((\App\FAQ::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('question', '=', $request->input('question'))->get()) != null) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\FAQ::where('question', '=', $request->input('question'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+            $title_exists = ((\App\FAQ::where('question', '=', $request->input('question'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
             return response()->json($title_exists);
         }  
     }

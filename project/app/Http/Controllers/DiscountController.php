@@ -219,12 +219,12 @@ class DiscountController extends Controller
         
         if($id != '')
         {
-            $code_exists = (count(\App\Discount::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('code', '=', $request->input('code'))->get()) > 0) ? false : true;
+            $code_exists = ((\App\Discount::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('code', '=', $request->input('code'))->get()) != null) ? false : true;
             return response()->json($code_exists);
         }
         else
         {
-            $code_exists = (count(\App\Discount::where('code', '=', $request->input('code'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+            $code_exists = ((\App\Discount::where('code', '=', $request->input('code'))->where('company_id', '=', $companyid)->get()) != null) ? false : true;
             return response()->json($code_exists);
         }  
     }
