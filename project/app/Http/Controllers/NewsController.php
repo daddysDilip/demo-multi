@@ -12,6 +12,7 @@ use URL;
 use Carbon\Carbon; 
 use Auth;
 use Excel;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -62,7 +63,7 @@ class NewsController extends Controller
 
         $news['tempcode'] = str_random(6);
 
-        $cslug = str_slug($request->newstitle, '-');
+        $cslug = Str::slug($request->newstitle, '-');
         $slugcheck = News::where('slug','=',$cslug)->count();
 
         $slug="";
@@ -174,7 +175,7 @@ class NewsController extends Controller
 
         $newsdeflang_exists = NewsTranslations::where('langcode', '=', $request->default_langcode)->where('newsid', '=', $id)->first();
 
-        if(count($newsdeflang_exists) > 0)
+        if($newsdeflang_exists != null)
         {
             NewsTranslations::where('langcode', '=', $request->default_langcode)->where('newsid', '=', $id)->update(['newstitle' => $request->newstitle, 'content' => $request->content]);
         }
@@ -196,7 +197,7 @@ class NewsController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $newslang_exists = NewsTranslations::where('langcode', '=', $transdata)->where('newsid', '=', $id)->first();
-            if(count($newslang_exists) > 0)
+            if($newslang_exists != null)
             {
 
                 NewsTranslations::where('langcode', '=', $transdata)->where('newsid', '=', $id)->update(['newstitle' => $request->trans_newstitle[$data], 'content' => $request->trans_content[$data]]);
@@ -296,7 +297,7 @@ class NewsController extends Controller
 
             $newstrans = NewsTranslations::where('newsid',$alldata->id)->where('langcode',get_defaultlanguage())->first();
 
-            if(count($newstrans) > 0)
+            if($newstrans != null)
             {
                 $newstitle = $newstrans->newstitle;
                 $content = $newstrans->content;
@@ -350,7 +351,7 @@ class NewsController extends Controller
 
                 $newsdate=date('Y-m-d',strtotime($value['news_date']));
 
-                $cslug = str_slug($value['news_title'], '-');
+                $cslug = Str::slug($value['news_title'], '-');
                 $slugcheck = News::where('slug','=',$cslug)->count();
 
                 $slug="";
@@ -420,10 +421,6 @@ class NewsController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
-
-
-        // dd($limit,$start,$order,$dir);
-            
         if(empty($request->input('search.value')))
         {            
             $posts = News::where('company_id',$companyid)
@@ -431,39 +428,23 @@ class NewsController extends Controller
                          ->limit($limit)
                          ->orderBy($order,$dir)
                          ->get();
-
-                         // dd($posts);
-        }
-        else {
-
+        } else {
             $search = $request->input('search.value'); 
-            // dd($search);
-
-            // $posts =  News::where('company_id',$companyid)
-            //                 ->where('id','LIKE',"%{$search}%")
-            //                 ->orWhere('eventname', 'LIKE',"%{$search}%")
-            //                 ->offset($start)
-            //                 ->limit($limit)
-            //                 ->orderBy($order,$dir)
-            //                 ->get();
-
-                             $posts =  News::where('company_id',$companyid)
-                            ->where('id','LIKE',"%{$search}%")
-                            ->orWhere('newstitle', 'LIKE',"%{$search}%")
-                            ->orWhere('created_at', 'LIKE',"%{$search}%")
-
-                            ->offset($start)
-                            ->limit($limit)
-                            ->orderBy($order,$dir)
-                            ->get();
-
+            
+            $posts =  News::where('company_id',$companyid)
+                ->where('id','LIKE',"%{$search}%")
+                ->orWhere('newstitle', 'LIKE',"%{$search}%")
+                ->orWhere('created_at', 'LIKE',"%{$search}%")
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order,$dir)
+                ->get();
 
             $totalFiltered = News::where('company_id',$companyid)
-                            ->orwhere('id','LIKE',"%{$search}%")
-                             ->orWhere('newstitle', 'LIKE',"%{$search}%")
-                            ->orWhere('created_at', 'LIKE',"%{$search}%")
-                             ->count();
-                         // dd($totalFiltered);
+                    ->orwhere('id','LIKE',"%{$search}%")
+                     ->orWhere('newstitle', 'LIKE',"%{$search}%")
+                    ->orWhere('created_at', 'LIKE',"%{$search}%")
+                     ->count();
         }
    
         $data = array();
@@ -472,32 +453,30 @@ class NewsController extends Controller
             foreach ($posts as $post)
             {
 
-            // $etitle=NewsTranslations::where('newsid',$post->id)->where('langcode',app()->getLocale() )->first()->newstitle;
-
-             if($post->newsimage != '')
-            {
-        $image= "<img style='width: 300px;height: 100px;' src='".url("/")."/assets/images/news/".$post->newsimage."'>";
-              }
-               else
-               {      
-        $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='width: 300px;height: 100px;'>";
-              }
+                if($post->newsimage != '')
+                {
+                    $image= "<img style='width: 100px;height: 100px;' src='".url("/")."/assets/images/news/".$post->newsimage."'>";
+                }
+                else
+                {      
+                    $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='100' height='100' style='width: 100px;height: 100px;'>";
+                }
 
                 $nestedData['newsimage'] =$image;
                 $nestedData['newstitle'] =$post->newstitle;
                 $nestedData['created_at']= date('jS M Y',strtotime($post->created_at));
 
-                       if($post->status == 1)
-                 {
-                  $nestedData['status'] = "<a href='".url('admin/news')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
+                if($post->status == 1)
+                {
+                    $nestedData['status'] = "<a href='".url('admin/news')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
 
-                 }                                       
+                }                                       
                 elseif($post->status == 0)
                 {
-                      $nestedData['status'] = "<a href='".url('admin/news')."/status/$post->id}}/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
+                    $nestedData['status'] = "<a href='".url('admin/news')."/status/$post->id}}/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
                 }
                               
-$nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='news/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
+                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='news/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
 
                 $data[] = $nestedData;
                 $i++;

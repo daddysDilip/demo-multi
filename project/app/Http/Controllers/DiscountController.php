@@ -84,16 +84,18 @@ class DiscountController extends Controller
         $discounttrans['langcode'] = $request->default_langcode;
         $discounttrans['company_id'] = get_company_id();
         $discounttrans->save();
-
-        foreach($request->langcode as $data => $transdata)
+        if($request->langcode)
         {
-            $discountalltrans = new DiscountTranslations();
-            $discountalltrans['discountid'] = $discount->id;
-            $discountalltrans['title'] = $request->trans_title[$data];
-            $discountalltrans['description'] = $request->trans_description[$data];
-            $discountalltrans['langcode'] = $transdata;
-            $discountalltrans['company_id'] = get_company_id();
-            $discountalltrans->save();       
+            foreach($request->langcode as $data => $transdata)
+            {
+                $discountalltrans = new DiscountTranslations();
+                $discountalltrans['discountid'] = $discount->id;
+                $discountalltrans['title'] = $request->trans_title[$data];
+                $discountalltrans['description'] = $request->trans_description[$data];
+                $discountalltrans['langcode'] = $transdata;
+                $discountalltrans['company_id'] = get_company_id();
+                $discountalltrans->save();       
+            }
         }
 
         return redirect('admin/discount')->with('message', trans("app.DiscountAddMsg"));
@@ -158,7 +160,7 @@ class DiscountController extends Controller
 
         $discountdeflang_exists = DiscountTranslations::where('langcode', '=', $request->default_langcode)->where('discountid', '=', $id)->first();
 
-        if(count($discountdeflang_exists) > 0)
+        if($discountdeflang_exists != null)
         {
             DiscountTranslations::where('langcode', '=', $request->default_langcode)->where('discountid', '=', $id)->update(['title' => $request->title, 'description' => $request->description]);
         }
@@ -173,24 +175,27 @@ class DiscountController extends Controller
             $blogtrans->save();
         }
         
-
-        foreach($request->langcode as $data => $transdata)
+        if($request->langcode)
         {
-            $discountlang_exists = DiscountTranslations::where('langcode', '=', $transdata)->where('discountid', '=', $id)->first();
-            if(count($discountlang_exists) > 0)
+            foreach($request->langcode as $data => $transdata)
             {
+                $discountlang_exists = DiscountTranslations::where('langcode', '=', $transdata)->where('discountid', '=', $id)->first();
+                if(count($discountlang_exists) > 0)
+                {
 
-                DiscountTranslations::where('langcode', '=', $transdata)->where('discountid', '=', $id)->update(['title' => $request->trans_title[$data], 'description' => $request->trans_description[$data]]);
-            }
-            else
-            {
-                $blogalltrans = new DiscountTranslations();
-                $blogalltrans['discountid'] = $id;
-                $blogalltrans['title'] = $request->trans_title[$data];
-                $blogalltrans['description'] = $request->trans_description[$data];
-                $blogalltrans['langcode'] = $transdata;
-                $blogalltrans['company_id'] = get_company_id();
-                $blogalltrans->save();
+                    DiscountTranslations::where('langcode', '=', $transdata)->where('discountid', '=', $id)->update(['title' => $request->trans_title[$data], 'description' => $request->trans_description[$data]]);
+                }
+                else
+                {
+                    $blogalltrans = new DiscountTranslations();
+                    $blogalltrans['discountid'] = $id;
+                    $blogalltrans['title'] = $request->trans_title[$data];
+                    $blogalltrans['description'] = $request->trans_description[$data];
+                    $blogalltrans['langcode'] = $transdata;
+                    $blogalltrans['company_id'] = get_company_id();
+                    $blogalltrans->save();
+                }
+                
             }
             
         }
@@ -214,7 +219,7 @@ class DiscountController extends Controller
         
         if($id != '')
         {
-            $code_exists = (count(\App\Discount::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('code', '=', $request->input('code'))->get()) > 0) ? false : true;
+            $code_exists = (count(\App\Discount::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('code', '=', $request->input('code'))->get())  > 0) ? false : true;
             return response()->json($code_exists);
         }
         else

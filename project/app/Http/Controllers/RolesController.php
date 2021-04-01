@@ -78,16 +78,18 @@ class RolesController extends Controller
         $roletrans['langcode'] = $request->default_langcode;
         $roletrans['company_id'] = get_company_id();
         $roletrans->save();
-
-        foreach($request->langcode as $data => $transdata)
+        if($request->langcode)
         {
-            $rolealltrans = new RoleTranslations();
-            $rolealltrans['roleid'] = $lastid;
-            $rolealltrans['role'] = $request->trans_role[$data];
-            $rolealltrans['langcode'] = $transdata;
-            $rolealltrans['company_id'] = get_company_id();
-            $rolealltrans->save();    
-            
+            foreach($request->langcode as $data => $transdata)
+            {
+                $rolealltrans = new RoleTranslations();
+                $rolealltrans['roleid'] = $lastid;
+                $rolealltrans['role'] = $request->trans_role[$data];
+                $rolealltrans['langcode'] = $transdata;
+                $rolealltrans['company_id'] = get_company_id();
+                $rolealltrans->save();    
+                
+            }            
         }
 
         return redirect('admin/roles')->with('message','New Role Added Successfully.');
@@ -177,7 +179,7 @@ class RolesController extends Controller
 
         $roledeflang_exists = RoleTranslations::where('langcode', '=', $request->default_langcode)->where('roleid', '=', $id)->first();
 
-        if(count($roledeflang_exists) > 0)
+        if($roledeflang_exists != null)
         {
             RoleTranslations::where('langcode', '=', $request->default_langcode)->where('roleid', '=', $id)->update(['role' => $request->role]);
         }
@@ -195,7 +197,7 @@ class RolesController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $rolelang_exists = RoleTranslations::where('langcode', '=', $transdata)->where('roleid', '=', $id)->first();
-            if(count($rolelang_exists) > 0)
+            if($rolelang_exists > 0)
             {
 
                 RoleTranslations::where('langcode', '=', $transdata)->where('roleid', '=', $id)->update(['role' => $request->trans_role[$data]]);
@@ -231,12 +233,12 @@ class RolesController extends Controller
 
         if($id != '')
         {
-            $role_exists = (count(\App\Roles::where('id', '!=', $id)->where('role', '=', $request->input('role'))->where('company_id',$companyid)->get()) > 0) ? false : true;
+            $role_exists = (count(\App\Roles::where('id', '!=', $id)->where('role', '=', $request->input('role'))->where('company_id',$companyid)->get())  > 0) ? false : true;
             return response()->json($role_exists);
         }
         else
         {
-            $role_exists = (count(\App\Roles::where('role', '=', $request->input('role'))->where('company_id',$companyid)->get()) > 0) ? false : true;
+            $role_exists = (count(\App\Roles::where('role', '=', $request->input('role'))->where('company_id',$companyid)->get())  > 0) ? false : true;
             return response()->json($role_exists);
         }  
     }

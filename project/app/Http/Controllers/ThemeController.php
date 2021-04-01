@@ -175,12 +175,12 @@ class ThemeController extends Controller
 
         if($id != '')
         {
-            $title_exists = (count(\App\Themes::where('id', '!=', $id)->where('themename', '=', $request->input('themename'))->get()) > 0) ? false : true;
+            $title_exists = (count(\App\Themes::where('id', '!=', $id)->where('themename', '=', $request->input('themename'))->get())  > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\Themes::where('themename', '=', $request->input('themename'))->get()) > 0) ? false : true;
+            $title_exists = (count(\App\Themes::where('themename', '=', $request->input('themename'))->get())  > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }

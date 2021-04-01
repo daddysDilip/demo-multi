@@ -170,7 +170,7 @@ class SubCategoryController extends Controller
 
          
         
-        if(count($subcats) > 0)
+        if($subcats != null)
         {
 
             return $subcats;
@@ -194,7 +194,7 @@ class SubCategoryController extends Controller
         $subcats=Category::where('mainid', $id)->where('role', 'sub')->where('company_id',$companyid)->where('status',1)->select('categories.*','categories.name as cname')->get();
 
         
-        if(count($subcats) > 0)
+        if($subcats != null)
         {
 
             return response()->json(['response' => $subcats]);
@@ -265,7 +265,7 @@ class SubCategoryController extends Controller
 
         $categorydeflang_exists = CategoryTranslations::where('langcode', '=', $request->default_langcode)->where('categoryid', '=', $id)->first();
 
-        if(count($categorydeflang_exists) > 0)
+        if($categorydeflang_exists != null)
         {
             CategoryTranslations::where('langcode', '=', $request->default_langcode)->where('categoryid', '=', $id)->update(['name' => $request->name]);
         }
@@ -285,7 +285,7 @@ class SubCategoryController extends Controller
         foreach($request->langcode as $data => $transdata)
         {
             $categorylang_exists = CategoryTranslations::where('langcode', '=', $transdata)->where('categoryid', '=', $id)->first();
-            if(count($categorylang_exists) > 0)
+            if($categorylang_exists != null)
             {
 
                 CategoryTranslations::where('langcode', '=', $transdata)->where('categoryid', '=', $id)->update(['name' => $request->trans_name[$data]]);

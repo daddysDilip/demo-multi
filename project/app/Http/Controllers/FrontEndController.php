@@ -36,6 +36,7 @@ use App\CustomerAddress;
 use App\Seosetion;
 use DB;
 use Mail;
+use Illuminate\Support\Str;
 
 class FrontEndController extends Controller
 {
@@ -333,13 +334,14 @@ class FrontEndController extends Controller
         /*$productdata = Product::findOrFail($id);*/
         $productdata = Product::where('company_id', $companyid)->where('id', $id)->where('slug', $title)->first();
         $meta=$productdata;
-        if(count($productdata) > 0)
+        if($productdata != "")
         {
             $data['views'] = $productdata->views + 1;
             $productdata->update($data);
             $relateds = Product::where('status','1')->where('company_id',$companyid)->where('id', '!=', $id)->where('slug', '!=', $title)->whereRaw('FIND_IN_SET(?,category)', [$productdata->category[0]])
                 ->take(8)->get();
             $gallery = Gallery::where('productid',$id)->get();
+            $purchaseproduct = "";
 
             $reviews = Review::where('productid',$id)->where('company_id',$companyid)->where('status',1)->get();
             return view($themename.'product', compact('productdata','gallery','reviews','relateds','purchaseproduct','meta'));
@@ -683,6 +685,7 @@ class FrontEndController extends Controller
     {   
 
 	    $companyid = get_company_id();
+
         $themename = get_theme_name(); 
         $settings = Settings::where('company_id', $companyid)->first();
 
@@ -702,7 +705,7 @@ class FrontEndController extends Controller
 
                 // dd($caddress);
 
-        if(count($caddress) > 0)
+        if($caddress != "")
         {
 
             
@@ -764,7 +767,7 @@ class FrontEndController extends Controller
         $order = new Order;
         $success_url = action('PaymentController@payreturn',$subdomain);
         $item_name = $settings->title." Order";
-        $item_number = str_random(4).time();
+        $item_number = Str::random(7).time();
         $item_amount = $request->total;
 
         $request->customer;
@@ -1063,7 +1066,7 @@ class FrontEndController extends Controller
 
         $customeraddress = new CustomerAddress;
 
-        if(count($caddress) > 0)
+        if($caddress != null)
         {
             $addressdata = array(
                 'billing_firstname' => $request->customer_firstname,
@@ -1396,7 +1399,7 @@ class FrontEndController extends Controller
 
         $customeraddress = new CustomerAddress;
 
-        if(count($caddress) > 0)
+        if($caddress != null)
         {
             $addressdata = array(
                 'billing_firstname' => $request->customer_firstname,

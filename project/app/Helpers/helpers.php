@@ -29,6 +29,37 @@ if (!function_exists('human_file_size')) {
         }
     }
 
+    function get_time_difference($date1, $date2 = "", $is_exp = false)
+{
+    if ($date2 == "") {
+        $date2 = date("Y-m-d");
+    }
+    $diff  = date_diff(date_create($date1), date_create($date2));
+    $year  = $diff->format("%y");
+    $month = $diff->format("%m");
+    $days  = $diff->format("%d");
+    if ($year >= 1 && $year < 5) {
+        if($month == 0){
+            $res = $year . " Year(s) ";
+        } else {
+            $frection = floor(10*$month/12);
+            $res = $year . ".". $frection ." Year(s) ";
+        }
+    } else if ($year >= 5) {
+        $res = $year . " Year(s) ";
+    } else if ($month >= 1) {
+        $res = $month . " Month(s) ";
+    } else if ($days >= 1) {
+        $res = $days . " Day(s) ";
+    } else {
+        if ($is_exp)
+            $res = false;
+        else
+            $res = "0 Day";
+    }
+    return $res;
+}
+
 
 
     function get_active_company()
@@ -601,5 +632,20 @@ if (!function_exists('human_file_size')) {
 	   // return $query->result();
 	}
 
+    function str_random($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
+    function pr($data)
+    {
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
+    }
 }

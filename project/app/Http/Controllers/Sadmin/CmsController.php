@@ -10,6 +10,7 @@ use File;
 use URL;
 use Carbon\Carbon; 
 use Auth;
+use Illuminate\Support\Str;
 
 class CmsController extends Controller
 {
@@ -50,7 +51,7 @@ class CmsController extends Controller
         $cms = new Cms();
         $cms->fill($request->all());
 
-        $slug = str_slug($cms['name'], '-');
+        $slug = Str::slug($cms['name'], '-');
         $cms['slug'] = $slug;
         $cms['tempcode'] = str_random(6);
 
@@ -134,12 +135,12 @@ class CmsController extends Controller
 
         if($id != '')
         {
-             $title_exists = (count(\App\Cms::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('name', '=', $request->input('name'))->get()) > 0) ? false : true;
+             $title_exists = (count(\App\Cms::where('id', '!=', $id)->where('company_id', '=', $companyid)->where('name', '=', $request->input('name'))->get())  > 0) ? false : true;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = (count(\App\Cms::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get()) > 0) ? false : true;
+            $title_exists = (count(\App\Cms::where('name', '=', $request->input('name'))->where('company_id', '=', $companyid)->get())  > 0) ? false : true;
             return response()->json($title_exists);
         }  
     }

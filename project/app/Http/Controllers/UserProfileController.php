@@ -181,6 +181,7 @@ class UserProfileController extends Controller
         $companyid = get_company_id();
         if(Auth::guard('profile')->user())
         {
+            $user = Auth::guard('profile')->user();
             $currentdate=date('Y-m-d');
             $pickups = PickUpLocations::where('status',1)->where('company_id',$companyid)->get();
             $product = 0;
@@ -192,7 +193,7 @@ class UserProfileController extends Controller
             $address = CustomerAddress::where('customerid',Auth::guard('profile')->user()->id)->first();
             $country = Country::where('status','1')->get();
 
-            if(count($address) > 0)
+            if($address != "")
             {
                 $billingstate = State::where('status','1')->where('countryid',$address->billing_country)->get();
                 $billingcity = City::where('status','1')->where('stateid',$address->billing_state)->get();
@@ -200,14 +201,14 @@ class UserProfileController extends Controller
                 $shippingstate = State::where('status','1')->where('countryid',$address->shipping_country)->get();
                 $shippingcity = City::where('status','1')->where('stateid',$address->shipping_state)->get();
             }
-            /*else
+            else
             {
                 $billingstate = State::where('status','1')->get();
                 $billingcity = City::where('status','1')->get();
 
                 $shippingstate = State::where('status','1')->get();
                 $shippingcity = City::where('status','1')->get();
-            }*/
+            }
             
             $carts = Cart::where('uniqueid',Session::get('uniqueid'));
             $cartdata = $carts->get();

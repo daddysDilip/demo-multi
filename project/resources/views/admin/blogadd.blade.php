@@ -7,7 +7,7 @@
         min-height: 204px !important;
     }
 </style>
-{{dd('iddndndndndnd')}}
+{{-- {{dd('iddndndndndnd')}} --}}
     <div class="prtm-content-wrapper">
         <div class="prtm-content">
             <div class="prtm-page-bar">

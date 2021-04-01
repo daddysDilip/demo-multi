@@ -96,7 +96,7 @@
 
 
                                         <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Meta Title<span class="required">*</span><p class="small-label">(English)</p>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Meta Title<p class="small-label">(English)</p>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input class="form-control col-md-7 col-xs-12" name="metatitle" id="metatitle" placeholder="e.g ABCS" type="text"  minlength="3" maxlength="60"> 
@@ -104,7 +104,7 @@
                             </div>
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Meta Description<span class="required">*</span><p class="small-label">(English)</p>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Meta Description<p class="small-label">(English)</p>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <textarea class="form-control col-md-7 col-xs-12" name="metadec" id="metadec" placeholder="e.g ABCS" type="text"  minlength="3" maxlength="120"></textarea>
@@ -112,7 +112,7 @@
                             </div>
 
                              <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Meta Keyword<span class="required">*</span><p class="small-label">(English)</p>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Meta Keyword<p class="small-label">(English)</p>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <textarea class="form-control col-md-7 col-xs-12" name="metakey" id="metakey" placeholder="e.g ABCS" type="text"  minlength="3" maxlength="160"></textarea>
