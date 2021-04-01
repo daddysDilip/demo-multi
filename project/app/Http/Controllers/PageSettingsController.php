@@ -179,6 +179,12 @@ class PageSettingsController extends Controller
         $brand = Brand::findOrFail($id);
         $data = $request->all();
 
+        if ($file = $request->file('blogo')){
+            $photo_name = time().$request->file('blogo')->getClientOriginalName();
+            $file->move('assets/images/brands',$photo_name);
+            $brand['image'] = $photo_name;
+        }
+
         if ($request->status == ""){
             $data['status'] = 0;
         }
@@ -188,7 +194,7 @@ class PageSettingsController extends Controller
         }
 
         $brand->update($data);
-        Session::flash('message', trans("app.BlogUpdateMsg"));
+        Session::flash('message', trans("app.BrandUpdateMsg"));
         return redirect('admin/pagesettings');
     }
 
@@ -366,26 +372,26 @@ class PageSettingsController extends Controller
             $pagetrans->save();
         }
         
-
-        foreach($request->langcode as $data => $transdata)
+        if($request->langcode)
         {
-            $pagelang_exists = PageSettingTranslations::where('langcode', '=', $transdata)->where('pagesettingsid', '=', $input['id'])->first();
-            
-            if($pagelang_exists != null)
+            foreach($request->langcode as $data => $transdata)
             {
-
-                PageSettingTranslations::where('langcode', '=', $transdata)->where('pagesettingsid', '=', $input['id'])->update(['contact' => $request->trans_contact[$data]]);
+                $pagelang_exists = PageSettingTranslations::where('langcode', '=', $transdata)->where('pagesettingsid', '=', $input['id'])->first();
+                
+                if($pagelang_exists != null)
+                {
+                    PageSettingTranslations::where('langcode', '=', $transdata)->where('pagesettingsid', '=', $input['id'])->update(['contact' => $request->trans_contact[$data]]);
+                }
+                else
+                {
+                    $pagealltrans = new PageSettingTranslations();
+                    $pagealltrans['pagesettingsid'] = $input['id'];
+                    $pagealltrans['contact'] = $request->trans_contact[$data];
+                    $pagealltrans['langcode'] = $transdata;
+                    $pagealltrans['company_id'] = get_company_id();
+                    $pagealltrans->save();
+                }
             }
-            else
-            {
-                $pagealltrans = new PageSettingTranslations();
-                $pagealltrans['pagesettingsid'] = $input['id'];
-                $pagealltrans['contact'] = $request->trans_contact[$data];
-                $pagealltrans['langcode'] = $transdata;
-                $pagealltrans['company_id'] = get_company_id();
-                $pagealltrans->save();
-            }
-            
         }
 
         Session::flash('message', trans("app.ContactContentUpdatedMsg"));
@@ -726,7 +732,7 @@ class PageSettingsController extends Controller
              
 
                 
-    $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='banner/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_brand('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
+    $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='brand/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_brand('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
 
 
    
