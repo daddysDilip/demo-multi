@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use App\Seosetion;
+use DB;
 use Illuminate\Support\Str;
 
 class PageSettingsController extends Controller
@@ -268,9 +269,7 @@ class PageSettingsController extends Controller
     {
         $faq = FAQ::findOrFail($id);
         $input['status'] = $status;
-
         $faq->update($input);
-
         return redirect('admin/pagesettings')->with('message',trans("app.FAQStatusUpdatedMsg"));
     }
 
@@ -426,30 +425,22 @@ class PageSettingsController extends Controller
         //
     }
 
-     public function allPosts(Request $request)
+    public function allPosts(Request $request)
     {   
         $companyid = get_company_id();
-        
         $columns = array( 
-
                         0 =>'question',
                         1 =>'answer',
                         2 =>'status',
                         3 =>'action',    
                          );
-                    
-    $totalData = FAQ::where('company_id',$companyid)->count();
-            
-        $totalFiltered = $totalData; 
 
+        $totalData = FAQ::where('company_id',$companyid)->count();
+        $totalFiltered = $totalData; 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
-
-
-
-        // dd($limit,$start,$order,$dir);
             
         if(empty($request->input('search.value')))
         {            
@@ -458,13 +449,9 @@ class PageSettingsController extends Controller
                          ->limit($limit)
                          ->orderBy($order,$dir)
                          ->get();
-                         // dd($posts);
         }
         else {
-
             $search = $request->input('search.value'); 
-            // dd($search);
-
             $posts =  FAQ::where('company_id',$companyid)
                             ->where('id','LIKE',"%{$search}%")
                             ->orWhere('question', 'LIKE',"%{$search}%")
@@ -474,14 +461,11 @@ class PageSettingsController extends Controller
                             ->orderBy($order,$dir)
                             ->get();
 
-
-
-        $totalFiltered = FAQ::where('company_id',$companyid)
+            $totalFiltered = FAQ::where('company_id',$companyid)
                             ->orwhere('id','LIKE',"%{$search}%")
                             ->orWhere('question', 'LIKE',"%{$search}%")
                             ->orWhere('answer', 'LIKE',"%{$search}%")
                             ->count();
-                // dd($totalFiltered);
         }
         $data = array();
         if(!empty($posts))
@@ -492,24 +476,15 @@ class PageSettingsController extends Controller
                 $nestedData['question'] =$post->question;
                 $nestedData['answer'] =$post->answer;
             
-               if($post->status == 1)
-                  {
-
+                if($post->status == 1)
+                {
                   $nestedData['status'] = "<a href='".url('admin/pagesettings')."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
-                 }
-
-
-                          
-               elseif($post->status == 0)
+                }
+                elseif($post->status == 0)
                 {
                       $nestedData['status'] = "<a href='".url('admin/pagesettings')."/status/".$post->id."/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
                 } 
-
-                
-    $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='faq/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_faqdata('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
-
-
-   
+                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='faq/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_faqdata('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
                 $data[] = $nestedData;
                 $i++;
             }
@@ -520,12 +495,11 @@ class PageSettingsController extends Controller
                   "recordsFiltered" => intval($totalFiltered), 
                   "data"            => $data   
                     );
-        // dd($json_data);
-       echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
- }   
+        echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
+    }   
 
 
-   public function allPostsbanner(Request $request)
+    public function allPostsbanner(Request $request)
     {   
         $companyid = get_company_id();
         
@@ -537,8 +511,7 @@ class PageSettingsController extends Controller
                         3 =>'action',    
                          );
                         
-
-    $totalData = Brand::where('type','banner')->where('company_id', '=', $companyid)->count();
+        $totalData = Brand::where('type','banner')->where('company_id', '=', $companyid)->count();
             
         $totalFiltered = $totalData; 
 
@@ -547,10 +520,6 @@ class PageSettingsController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
-
-
-        // dd($limit,$start,$order,$dir);
-            
         if(empty($request->input('search.value')))
         {            
             $posts = Brand::where('type','banner')
@@ -559,13 +528,10 @@ class PageSettingsController extends Controller
                          ->limit($limit)
                          ->orderBy($order,$dir)
                          ->get();
-                         // dd($posts);
         }
         else {
-
             $search = $request->input('search.value'); 
-            // dd($search);
-
+            
             $posts =  Brand::where('type','banner')
                             ->where('company_id',$companyid)
                             ->where('id','LIKE',"%{$search}%")
@@ -574,10 +540,7 @@ class PageSettingsController extends Controller
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
-
-
-
-        $totalFiltered = Brand::where('type','banner')
+            $totalFiltered = Brand::where('type','banner')
                             ->where('company_id',$companyid)
                             ->orwhere('id','LIKE',"%{$search}%")
                             ->orWhere('link', 'LIKE',"%{$search}%")
@@ -589,40 +552,32 @@ class PageSettingsController extends Controller
         { $i=1;
             foreach ($posts as $post)
             {
-                
-              
-
-        if($post->image != '')
-            {
-            $image= "<img style='max-width: 250px;' src='".url("/")."/assets/images/brands/".$post->image."'>";
-              }
-               else
-               {
+                if($post->image != '')
+                {
+                    $image= "<img style='max-width: 250px;' src='".url("/")."/assets/images/brands/".$post->image."'>";
+                }
+                else
+                {
         
-                  $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='max-width: 250px;'>";
-              }
-
-
+                    $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='max-width: 250px;'>";
+                }
                 $nestedData['image'] =$image;
                 $nestedData['link'] =$post->link;
            
-               if($post->status == 1)
-                  {
+                if($post->status == 1)
+                {
 
-                  $nestedData['status'] = "<a href='".url('admin/banner')."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
-                 }
-                          
-               elseif($post->status == 0)
+                    $nestedData['status'] = "<a href='".url('admin/banner')."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
+                }     
+                elseif($post->status == 0)
                 {
                       $nestedData['status'] = "<a href='".url('admin/banner')."/status/".$post->id."/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
                 } 
              
 
                 
-    $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='banner/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_banner('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
+                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='banner/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_banner('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
 
-
-   
                 $data[] = $nestedData;
                 $i++;
             }
@@ -634,33 +589,26 @@ class PageSettingsController extends Controller
                   "data"            => $data   
                     );
         // dd($json_data);
-       echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
- }   
+        echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
+    }   
 
-  public function allPostsbrandlogo(Request $request)
+    public function allPostsbrandlogo(Request $request)
     {   
         $companyid = get_company_id();
         
         $columns = array( 
-
                         0 =>'image',
                         1 =>'status',
                         2 =>'action',    
                          );
 
-
-    $totalData = Brand::where('type','brand')->where('company_id', '=', $companyid)->count();
-            
+        $totalData = Brand::where('type','brand')->where('company_id', '=', $companyid)->count();
         $totalFiltered = $totalData; 
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
-
-
-
-        // dd($limit,$start,$order,$dir);
             
         if(empty($request->input('search.value')))
         {            
@@ -670,13 +618,10 @@ class PageSettingsController extends Controller
                          ->limit($limit)
                          ->orderBy($order,$dir)
                          ->get();
-                         // dd($posts);
         }
         else {
 
             $search = $request->input('search.value'); 
-            // dd($search);
-
             $posts =  Brand::where('type','brand')
                             ->where('company_id',$companyid)
                             ->where('id','LIKE',"%{$search}%")
@@ -686,53 +631,37 @@ class PageSettingsController extends Controller
                             ->orderBy($order,$dir)
                             ->get();
 
-
-
-        $totalFiltered = Brand::where('type','brandbrands')
+            $totalFiltered = Brand::where('type','brandbrands')
                             ->where('company_id',$companyid)
                             ->orwhere('id','LIKE',"%{$search}%")
                             ->orWhere('link', 'LIKE',"%{$search}%")
                             ->count();
-                // dd($totalFiltered);
         }
         $data = array();
         if(!empty($posts))
         { $i=1;
             foreach ($posts as $post)
             {
-                
-              
-
-        if($post->image != '')
-            {
-            $image= "<img style='max-width: 250px;' src='".url("/")."/assets/images/brands/".$post->image."'>";
-              }
-               else
-               {
-        
-                  $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='max-width: 250px;'>";
-              }
-
-
+                if($post->image != '')
+                {
+                    $image= "<img style='max-width: 250px;' src='".url("/")."/assets/images/brands/".$post->image."'>";
+                }
+                else
+                {
+                    $image="<img src='".url("/")."/assets/images/placeholder.jpg' alt='product thumbnail' class='img-responsive' width='300' height='300' style='max-width: 250px;'>";
+                }
                 $nestedData['image'] =$image;
               
-                
-
-
-               if($post->status == 1)
-                  {
-
-                  $nestedData['status'] = "<a href='".url('admin/brandstatus')."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
-                 }
+                if($post->status == 1)
+                {
+                    $nestedData['status'] = "<a href='".url('admin/brandstatus')."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
+                }
                           
-               elseif($post->status == 0)
+                elseif($post->status == 0)
                 {
                       $nestedData['status'] = "<a href='".url('admin/brandstatus')."/status/".$post->id."/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
                 } 
-             
-
-                
-    $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='brand/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_brand('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
+                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='brand/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_brand('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
 
 
    
@@ -747,37 +676,25 @@ class PageSettingsController extends Controller
                   "data"            => $data   
                     );
         // dd($json_data);
-       echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
- }   
+        echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
+    }   
 
-
-
-
-  public function allpostsseo(Request $request)
+    public function allpostsseo(Request $request)
     {   
         $companyid = get_company_id();
-        
         $columns = array( 
-
                         0 =>'metatitle',
                         1 =>'metakey',
                         2 =>'metadec',
                         3 =>'action',    
                          );
 
-
-    $totalData = Seosetion::where('company_id', '=', $companyid)->count();
-            
+        $totalData = Seosetion::where('company_id', '=', $companyid)->count();
         $totalFiltered = $totalData; 
-
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
-
-
-
-        // dd($limit,$start,$order,$dir);
             
         if(empty($request->input('search.value')))
         {            
@@ -786,13 +703,9 @@ class PageSettingsController extends Controller
                          ->limit($limit)
                          ->orderBy($order,$dir)
                          ->get();
-                         // dd($posts);
         }
         else {
-
             $search = $request->input('search.value'); 
-            // dd($search);
-
             $posts =  Seosetion::where('company_id',$companyid)
                             ->where('id','LIKE',"%{$search}%")
                             ->orWhere('metatitle', 'LIKE',"%{$search}%")
@@ -803,51 +716,24 @@ class PageSettingsController extends Controller
                             ->orderBy($order,$dir)
                             ->get();
 
-
-
         $totalFiltered = Seosetion::where('company_id',$companyid)
                             ->orwhere('id','LIKE',"%{$search}%")
                             ->orWhere('metatitle', 'LIKE',"%{$search}%")
                                ->orWhere('metakey', 'LIKE',"%{$search}%")
                                   ->orWhere('metadec', 'LIKE',"%{$search}%")
                             ->count();
-                // dd($totalFiltered);
         }
         $data = array();
         if(!empty($posts))
         { $i=1;
             foreach ($posts as $post)
             {
-                
-              
-
-      
-
                 $nestedData['metatitle'] =$post->metatitle;
-               $nestedData['metakey'] =$post->metakey;
-               $nestedData['metadec'] =$post->metadec;
+                $nestedData['metakey'] =$post->metakey;
+                $nestedData['metadec'] =$post->metadec;
                 
-                
-                
+                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='seoview/".$post->slug."'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li></ul></div>";
 
-
-               // if($post->status == 1)
-               //    {
-
-               //    $nestedData['status'] = "<a href='".url('admin/brandstatus')."/status/".$post->id."/0'class='"."btn btn-success btn-xs'>Active</a>";
-               //   }
-                          
-               // elseif($post->status == 0)
-               //  {
-               //        $nestedData['status'] = "<a href='".url('admin/brandstatus')."/status/".$post->id."/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
-               //  } 
-             
-
-                
-    $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='seoview/".$post->slug."'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li></ul></div>";
-
-
-   
                 $data[] = $nestedData;
                 $i++;
             }
@@ -858,28 +744,20 @@ class PageSettingsController extends Controller
                   "recordsFiltered" => intval($totalFiltered), 
                   "data"            => $data   
                     );
-        // dd($json_data);
-       echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
- }   
+            echo json_encode($json_data,JSON_UNESCAPED_UNICODE );        
+    }   
 
 
 
-         public function seoadd()
-         {
+    public function seoadd()
+    {
+        return view('admin.seosetionadd');
+    }
 
 
-             return view('admin.seosetionadd');
-         }
-
-
-        public function seoinsert(Request $request)
-         {
-
-                // dd($request->all());
-
-                
-
-                 $seosetion = new Seosetion();
+    public function seoinsert(Request $request)
+    {
+        $seosetion = new Seosetion();
         $seosetion->fill($request->all());
 
         $cslug = Str::slug($request->metatitle, '-');
@@ -894,14 +772,9 @@ class PageSettingsController extends Controller
         {
             $slug = $cslug;
         }
-
-
-
-
-   
-          $seosetion['metatitle'] = $request->metatitle;
+        $seosetion['metatitle'] = $request->metatitle;
         $seosetion['metadec'] = $request->metadec;
-            $seosetion['metakey'] = $request->metakey;
+        $seosetion['metakey'] = $request->metakey;
     
         $seosetion['slug'] = $slug;
         $seosetion['company_id'] = get_company_id();
@@ -909,39 +782,25 @@ class PageSettingsController extends Controller
            // dd($blog); 
         $seosetion->save();
         return redirect('admin/pagesettings');
+    }
 
-       
-        }
-
-          public function seoview($subdomain,$id)
+    public function seoview($subdomain,$slug)
     {
-        $seosetion = Seosetion::where('slug',$id)->first();
-        // dd($seosetion);
-
+        $seosetion = Seosetion::where('slug',$slug)->first();
+        
         return view('admin.seosetionedit',compact('seosetion'));
     }
 
 
     public function seosetionupdate(Request $request, $subdomain)
     {
-       
-        // dd($request->all());
+        $seosetion=Seosetion::findOrFail($request->id);
+        $data = $request->all();
+        $data['metatitle'] = $request->metatitle;
+        $data['metadec'] = $request->metadec;
+        $data['metakey'] = $request->metakey;
 
-                        $seosetion=Seosetion::findOrFail($request->id);
-                         $data = $request->all();
-
-
-                          $data['metatitle'] = $request->metatitle;
-                          $data['metadec'] = $request->metatitle;
-                          $data['metakey'] = $request->metatitle;
-
-                          
-
-                             $seosetion->update($data);
-
-                               return redirect('admin/pagesettings');
-
-                        
-
+        $seosetion->update($data);
+        return redirect('admin/pagesettings');
     }
 }
