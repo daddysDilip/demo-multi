@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use File;
 use URL;
 use Mail;
+use Log;
 
 class EmailcomposeController extends Controller
 {
@@ -42,7 +43,27 @@ class EmailcomposeController extends Controller
      */
     public function store(Request $request)
     {
-        $from = 'tarangtesting@gmail.com';
+        // var_dump($request->subject); die;
+        $content = $request->message;
+        Mail::send('email',compact('content'), function ($message) use ($request){
+            $message->from('dilip.daddyscode@gmail.com', 'Dilip');
+            $message->to($request->to);
+            if($request->cc)
+                $message->cc($request->cc);
+            if($request->bcc)
+                $message->bcc($request->bcc);
+            $message->subject($request->subject);
+        }); 
+
+        if (Mail::failures()) 
+        {
+            Log::info('Failed to send email -> '.$failures[] = Mail::failures()[0]);
+            return redirect('admin/emailcompose')->with('error','Mail Not Sent.');
+        } else {
+            return redirect('admin/emailcompose')->with('success','Mail Sent Successfully.');
+        }
+        /*
+        $from = 'dilip.daddyscode@gmail.com';
         $from_name = 'Estorewhiz';
         $to = $request['to']; 
         if(isset($request['cc']))
@@ -66,7 +87,7 @@ class EmailcomposeController extends Controller
         $subject = $request['subject'];
         $message = $request['message'];
 
-        $headers  = "From: tarangtesting@gmail.com\r\nX-Mailer: php\r\n";
+        $headers  = "From: dilip.daddyscode@gmail.com\r\nX-Mailer: php\r\n";
         $headers .= "MIME-Version: 1.0\r\n"; #Define MIME Version
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n"; #Set content type
         $headers .= "CC: $cc\r\n"; #Your CC Mail List
@@ -79,7 +100,7 @@ class EmailcomposeController extends Controller
         else
         {
             return redirect('admin/emailcompose')->with('error','Mail Not Sent.');
-        }  
+        }  */
 
     }
 
