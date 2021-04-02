@@ -38,7 +38,7 @@ class ThemeController extends Controller
         //     $i++;
         // }
          
-        return view('sadmin.themelist',compact('theme','activetheme'));
+        return view('sadmin.themelist2',compact('theme','activetheme'));
     }
 
     /**
@@ -238,12 +238,12 @@ class ThemeController extends Controller
 
         if($id != '')
         {
-            $title_exists = ((\App\Themes::where('id', '!=', $id)->where('themeurl', '=', $request->input('themeurl'))->get()) != null) ? false : true;
+            $title_exists = ((\App\Themes::where('id', '!=', $id)->where('themeurl', '=', $request->input('themeurl'))->get()) != null) ? true : false;
             return response()->json($title_exists);
         }
         else
         {
-            $title_exists = ((\App\Themes::where('themeurl', '=', $request->input('themeurl'))->get()) != null) ? false : true;
+            $title_exists = ((\App\Themes::where('themeurl', '=', $request->input('themeurl'))->get()) != null) ? true : false;
             return response()->json($title_exists);
         }  
     }

@@ -26,7 +26,7 @@ class PlanController extends Controller
     public function index()
     {
         $plan = Plans::all();
-        return view('sadmin.planlist',compact('plan'));
+        return view('sadmin.planlist2',compact('plan'));
     }
 
     /**

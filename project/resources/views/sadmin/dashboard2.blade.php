@@ -3,7 +3,23 @@
 @section('content')
 
 @php $companyid = get_company_id(); @endphp
-
+   <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Dashboard
+                <small class="text-muted">Welcome to Dashboard</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">                
+                <!-- <button class="btn btn-primary btn-icon btn-round hidden-sm-down float-right m-l-10" type="button">
+                    <i class="zmdi zmdi-plus"></i>
+                </button>
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item active">Dashboard </li>
+                </ul>  -->               
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid">
         
@@ -70,13 +86,15 @@
         <!-- Page Heading -->
         
 
-        <div class="row">
+        <div class="row clearfix ">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="prtm-block">
+                <div class="prtm-block card">
                     <div class="prtm-block-title mrgn-b-lg">
-                        <div class="caption">
-                            <h3>Monthly Graph</h3>
-                        </div>
+                        
+                        <div class="header">
+                        <h2><strong>Monthly</strong> Graph </h2>
+                        
+                    </div>
                     </div>
                     <div class="prtm-block-content">
                         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
@@ -85,11 +103,13 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="prtm-block">
+                <div class="prtm-block card">
                     <div class="prtm-block-title mrgn-b-lg">
-                        <div class="caption">
-                            <h3>Yearly Graph</h3>
-                        </div>
+                        
+                        <div class="header">
+                        <h2><strong>Yearly</strong> Graph </h2>
+                        
+                    </div>
                     </div>
                     <div class="prtm-block-content">
                         <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
@@ -100,7 +120,7 @@
 
 
 
-        <div class="row">
+        <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="card" style="height: 500px;overflow-y: auto;">
                     <div class="header">
@@ -206,7 +226,7 @@
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="card " style="height: 500px;overflow-y: auto;">
                    <div class="header">
-                       <h2><strong>Buy</strong> Plan</h2>
+                       <h2><strong>Theme</strong> Buyer</h2>
                        
                    </div>
                    <div class="body">

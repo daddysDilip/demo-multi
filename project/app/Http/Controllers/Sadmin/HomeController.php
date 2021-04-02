@@ -52,11 +52,11 @@ class HomeController extends Controller
 
         $newcompany = Company::whereRaw('DATE(created_at) BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()')->orderBy('id','desc')->get();
 
-        $upgradeplan = Planupgradepay::join('company', 'company.id', '=', 'planupgradepay.company_id')->join('plans', 'plans.id', '=', 'planupgradepay.planid')->whereRaw('DATE(planupgradepay.created_at) BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()')->orderBy('planupgradepay.id','desc')->select(DB::raw("planupgradepay.*,company.comapany_name,plans.plantype"))->get();
+        $upgradeplan = Planupgradepay::join('company', 'company.id', '=', 'planupgradepay.company_id')->join('plans', 'plans.id', '=', 'planupgradepay.planid')->whereRaw('DATE(planupgradepay.created_at) BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()')->orderBy('planupgradepay.id','desc')->select(DB::raw("planupgradepay.*,company.comapany_name,plans.plantype,company.company_logo"))->get();
 
-        $buytheme = Buytheme::join('company', 'company.id', '=', 'buythemes.company_id')->join('themes', 'themes.id', '=', 'buythemes.themeid')->whereRaw('DATE(buythemes.created_at) BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()')->orderBy('buythemes.id','desc')->select(DB::raw("buythemes.*,company.comapany_name,themes.themename"))->get();
+        $buytheme = Buytheme::join('company', 'company.id', '=', 'buythemes.company_id')->join('themes', 'themes.id', '=', 'buythemes.themeid')->whereRaw('DATE(buythemes.created_at) BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()')->orderBy('buythemes.id','desc')->select(DB::raw("buythemes.*,company.comapany_name,themes.themename,company.company_logo"))->get();
 
-        $expireplan = Planupgradepay::join('company', 'company.id', '=', 'planupgradepay.company_id')->whereRaw('DATE(planupgradepay.expiry_date) BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)')->orderBy('planupgradepay.id','desc')->select(DB::raw("planupgradepay.*,company.comapany_name"))->get();
+        $expireplan = Planupgradepay::join('company', 'company.id', '=', 'planupgradepay.company_id')->whereRaw('DATE(planupgradepay.expiry_date) BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)')->orderBy('planupgradepay.id','desc')->select(DB::raw("planupgradepay.*,company.comapany_name,company.company_logo"))->get();
 
         $newinquiry = Contactus::whereRaw('DATE(created_at) BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()')->where('company_id',0)->orderBy('id','desc')->get();
 

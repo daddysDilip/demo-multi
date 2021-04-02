@@ -135,36 +135,31 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="header">
-                                            <h2><strong>Exportable</strong> Examples </h2>
+                                            <h2><strong>Company</strong> List </h2>
                                             <div class="prtm-block-title mrgn-b-lg">
-
-                                            
-                                            
-                                        </div>
-                                        <div class="caption">
-
-                                                    <a href="{!! url('sadmin/company/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add Company</a>
-
-                                                </div>
+                                            </div>
+                                            <div class="caption">
+                                               <!--  <a href="{!! url('sadmin/company/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add Company</a> -->
+                                                <a href="{!! url('sadmin/company/create') !!}" class="btn btn-primary hidden-sm-down float-right m-l-10" type="button">Add Company <i class="zmdi zmdi-plus"></i>
+                                                </a>
 
                                             </div>
-
-
-                                    <div class="body">
-                                        <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="posts">
-                                                <thead>  
-                                                          <tr >
-                                                            <th>Logo</th>
-                                                            <th>Company</th>
-                                                            <th>Store Url</th>
-                                                            <th>Email</th>
-                                                            <th>Phone</th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                </thead> 
-                                        </table>
-                                    </div>
+                                        </div>
+                                        <div class="body">
+                                            <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="posts">
+                                                    <thead>  
+                                                              <tr >
+                                                                <th>Logo</th>
+                                                                <th>Company</th>
+                                                                <th>Store Url</th>
+                                                                <th>Email</th>
+                                                                <th>Phone</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                    </thead> 
+                                            </table>
+                                        </div>
 
 
                                     </div>

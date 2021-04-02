@@ -35,6 +35,12 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/plugins/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css')}}"/>
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/plugins/morrisjs/morris.min.css')}}" />
+    <link href="{{ URL::asset('assets/sadmin2/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet" />
+    <!-- Bootstrap Select Css -->
+    <link href="{{ URL::asset('assets/sadmin2/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+    <!-- Multi Select Css -->
+<link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/plugins/multi-select/css/multi-select.css')}}">
+
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/css/main.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/css/color_skins.css')}}">
@@ -59,6 +65,27 @@
         .prtm-content-wrapper
         {
             margin-left: 280px !important;
+        }
+        .basic
+        {
+            
+            background: linear-gradient(60deg, #00adef, #0094da) !important;
+            color: #fff !important;
+        }
+        .platinum
+        {
+            background: linear-gradient(45deg, #708090, #7c8ea0) !important;
+            color: #fff !important;
+        }
+        .standard
+        {
+            background: linear-gradient(60deg, #16c99f, #12a682) !important;
+            color: #fff !important;
+        }
+        .golden
+        {
+            background: linear-gradient(60deg, #f83600, #fe8c00) !important;
+            color: #fff !important;
         }
     </style>
 
@@ -265,10 +292,15 @@
 
 <script src="{{ URL::asset('assets/sadmin2/bundles/libscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) --> 
 <script src="{{ URL::asset('assets/sadmin2/bundles/vendorscripts.bundle.js')}}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+<script src="{{ URL::asset('assets/sadmin2/plugins/momentjs/moment.js')}}"></script> 
+<script src="{{ URL::asset('assets/sadmin2/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script> 
+
 
 
 
 <script src="{{ URL::asset('assets/sadmin2/bundles/mainscripts.bundle.js')}}"></script>
+<script src="{{ URL::asset('assets/sadmin2/js/pages/forms/basic-form-elements.js')}}"></script>
+
 <script src="{{ URL::asset('assets/sadmin2/js/pages/index.js')}}"></script>
 
 <!-- sadminjs2 -->
@@ -307,6 +339,11 @@
 <script src="{{ URL::asset('assets/sadmin2/plugins/jquery-datatable/buttons/buttons.flash.min.js')}}"></script>
 <script src="{{ URL::asset('assets/sadmin2/plugins/jquery-datatable/buttons/buttons.html5.min.js')}}"></script>
 <script src="{{ URL::asset('assets/sadmin2/plugins/jquery-datatable/buttons/buttons.print.min.js')}}"></script>
+<script src="{{ URL::asset('assets/sadmin2/plugins/multi-select/js/jquery.multi-select.js')}}"></script> <!-- Multi Select Plugin Js --> 
+<script src="{{ URL::asset('assets/sadmin2/js/pages/forms/advanced-form-elements.js')}}"></script> 
+
+<script src="{{ URL::asset('assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{ URL::asset('assets/js/additional-methods.min.js')}}"></script>
 
 <!-- <script src="{{ URL::asset('assets/sadmin2/js/pages/tables/jquery-datatable.js')}}"></script> -->
 <!-- sadmin2 datatavke js -->
