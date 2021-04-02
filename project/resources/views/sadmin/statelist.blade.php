@@ -49,15 +49,10 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="caption">
-                <a href="{!! url('sadmin/state/create') !!}" class="btn btn-primary hidden-sm-down float-right m-l-10" type="button">Add New State <i class="zmdi zmdi-plus"></i>
-                  </a>
-                
-              </div>
+                    <a href="{!! url('sadmin/state/create') !!}" class="btn btn-primary hidden-sm-down float-right m-l-10" type="button">Add New State <i class="zmdi zmdi-plus"></i></a>
+                  </div>
                 </div>
-
               </div>
-              
-              
             </div>
             <div class="body">
               <table class="table table-bordered table-striped table-hover dataTable js-exportable" cellspacing="0"  id="posts" width="100%">
@@ -72,38 +67,38 @@
               @foreach($state as $alldata)
               <tr>
                 <td>{{$alldata->statename}}</td>
-                  <td>
-                    @if($alldata->status == 1)
-                      <a href="{!! url('sadmin/state') !!}/status/{{$alldata->id}}/0" class="btn btn-success btn-xs">Active</a>
-                    @elseif($alldata->status == 0)
-                      <a href="{!! url('sadmin/state') !!}/status/{{$alldata->id}}/1" class="btn btn-danger btn-xs">Deactive</a>
-                    @endif
-                  </td>
-                  <td>
-                    <div class="dropdown display-ib">
-                      <a href="javascript:;" class="mrgn-l-xs" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false"><i class="fa fa-cog fa-lg base-dark"></i></a>
-                      <ul class="dropdown-menu dropdown-arrow dropdown-menu-right">
-                        <li>
-                          <a href="{!! url('sadmin/state') !!}/{{$alldata->id}}/edit"><i class="fa fa-edit"></i> <span class="mrgn-l-sm">Edit </span> </a>
-                        </li>
-                        <li>
-                          <a href="#" onclick="return delete_data('{{$alldata->id}}');"><i class="fa fa-trash"></i> <span class="mrgn-l-sm">Delete </span></a>
-                        </li>
-                      </ul>  
-                    </div>
-                  </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-            </div>
-          </div>
-        </div>
+                <td>
+                  @if($alldata->status == 1)
+                    <a href="{!! url('sadmin/state') !!}/status/{{$alldata->id}}/0" class="btn btn-success btn-xs">Active</a>
+                  @elseif($alldata->status == 0)
+                    <a href="{!! url('sadmin/state') !!}/status/{{$alldata->id}}/1" class="btn btn-danger btn-xs">Deactive</a>
+                  @endif
+                </td>
+                <td>
+                  <div class="dropdown display-ib">
+                    <a href="javascript:;" class="mrgn-l-xs" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false"><i class="fa fa-cog fa-lg base-dark"></i></a>
+                    <ul class="dropdown-menu dropdown-arrow dropdown-menu-right">
+                      <li>
+                        <a href="{!! url('sadmin/state') !!}/{{$alldata->id}}/edit"><i class="fa fa-edit"></i> <span class="mrgn-l-sm">Edit </span> </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="return delete_data('{{$alldata->id}}');"><i class="fa fa-trash"></i> <span class="mrgn-l-sm">Delete </span></a>
+                      </li>
+                    </ul>  
+                  </div>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-   <!-- /.container-fluid -->
+</div>
+</div>
+</div>
+</div>
+ <!-- /.container-fluid -->
 </div>
 
 @stop
