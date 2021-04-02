@@ -46,7 +46,7 @@ class EmailcomposeController extends Controller
         // var_dump($request->subject); die;
         $content = $request->message;
         Mail::send('email',compact('content'), function ($message) use ($request){
-            $message->from('dilip.daddyscode@gmail.com', 'Dilip');
+            $message->from('roshanraj0211@gmail.com', 'RoshanRaj');
             $message->to($request->to);
             if($request->cc)
                 $message->cc($request->cc);
@@ -63,7 +63,7 @@ class EmailcomposeController extends Controller
             return redirect('admin/emailcompose')->with('success','Mail Sent Successfully.');
         }
         /*
-        $from = 'dilip.daddyscode@gmail.com';
+        $from = 'roshanraj0211@gmail.com';
         $from_name = 'Estorewhiz';
         $to = $request['to']; 
         if(isset($request['cc']))
@@ -87,7 +87,7 @@ class EmailcomposeController extends Controller
         $subject = $request['subject'];
         $message = $request['message'];
 
-        $headers  = "From: dilip.daddyscode@gmail.com\r\nX-Mailer: php\r\n";
+        $headers  = "From: roshanraj0211@gmail.com\r\nX-Mailer: php\r\n";
         $headers .= "MIME-Version: 1.0\r\n"; #Define MIME Version
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n"; #Set content type
         $headers .= "CC: $cc\r\n"; #Your CC Mail List
