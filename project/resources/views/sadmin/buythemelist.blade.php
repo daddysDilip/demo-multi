@@ -52,7 +52,6 @@
                             <div class="prtm-block-title mrgn-b-lg">
                             </div>
                             <div class="caption">
-                               <!--  <a href="{!! url('sadmin/company/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add Company</a> -->
                                 <a href="{!! url('sadmin/company/create') !!}" class="btn btn-primary hidden-sm-down float-right m-l-10" type="button">Add Company <i class="zmdi zmdi-plus"></i>
                                 </a>
 
