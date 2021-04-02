@@ -128,22 +128,19 @@ class BuyThemeController extends Controller
         //
     }
 
-       public function allPosts(Request $request)
+    public function allPosts(Request $request)
     {   
         $companyid = get_company_id();
         
         $columns = array( 
-                            
-                 0=>'themeid',
-                 1=>'companyname',
+                 0=>'themes.id',
+                 1=>'company.comapany_name',
                  2=>'payment',
-                 3=>'paymentdate',
+                 3=>'created_at',
                  4=> 'action');
 
-
-
         $totalData = Buytheme::where('company_id',$companyid)->count();
-        $totalData =5;
+        // $totalData =5;
         $totalFiltered = $totalData;
 
         $limit = $request->input('length');
@@ -156,8 +153,6 @@ class BuyThemeController extends Controller
             
         if(empty($request->input('search.value')))
         {            
-                  // $posts=Buytheme::leftjoin('buythemes')
-
             $posts = Buytheme::leftjoin('company', 'company.id', '=', 'buythemes.company_id')
                             ->leftjoin('themes', 'themes.id', '=', 'buythemes.themeid')
                             ->select(DB::raw("buythemes.*,themes.themename,company.comapany_name"))
@@ -166,29 +161,18 @@ class BuyThemeController extends Controller
                             ->orderBy($order,$dir)
                             ->get();
 
-
-            // $posts = Buytheme::offset($start)
-            //              ->limit($limit)
-            //              ->orderBy($order,$dir)
-            //              ->get();
-
-         $totalData=Buytheme::leftjoin('company', 'company.id', '=', 'buythemes.company_id')
+            /*$totalData=Buytheme::leftjoin('company', 'company.id', '=', 'buythemes.company_id')
                             ->leftjoin('themes', 'themes.id', '=', 'buythemes.themeid')
                             ->select(DB::raw("buythemes.*,themes.themename,company.comapany_name"))
                             ->offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
-                            ->get();
-                // ->get();
-
-                         // dd($posts);
+                            ->get();*/
         }
         else {
 
             $search = $request->input('search.value'); 
-            // dd($search);
-
-
+            
             $posts =  Buytheme::leftjoin('company', 'company.id', '=', 'buythemes.company_id')
                             ->leftjoin('themes', 'themes.id', '=', 'buythemes.themeid')
                             ->where('id','LIKE',"%{$search}%")
@@ -198,21 +182,11 @@ class BuyThemeController extends Controller
                             ->orderBy($order,$dir)
                             ->get();
 
-
-            // $totalFiltered =Buytheme::where('id','LIKE',"%{$search}%")
-                             // ->orWhere('themeid', 'LIKE',"%{$search}%")
-                             // ->count();
-
-
             $totalFiltered = Buytheme::leftjoin('company', 'company.id', '=', 'buythemes.company_id')
                             ->leftjoin('themes', 'themes.id', '=', 'buythemes.themeid')
                             ->where('id','LIKE',"%{$search}%")
                             ->select(DB::raw("buythemes.*,themes.themename,company.comapany_name"))
                            ->count();
-                         // dd($totalFiltered);
-
-
-       
         }
    
         $data = array();
@@ -220,45 +194,25 @@ class BuyThemeController extends Controller
         { $i=1;
             foreach ($posts as $post)
             {
-                    
-
                 $nestedData['themeid'] = $post->themename;
                 $nestedData['companyname'] = $post->comapany_name;
                 $nestedData['payment'] = $post->payment;
                 $nestedData['paymentdate'] = $post->created_at->format('jS M Y');
                 
-                                    
-
-                //  if($post->status == 1)
-                //  {
-                //   $nestedData['status'] = "<a href='".url('sadmin/sliders')."/status/$post->id}}/0'class='"."btn btn-success btn-xs'>Active</a>";
-
-                //  }
-                                        
-                // elseif($post->status == 0)
-                // {
-                //       $nestedData['status'] = "<a href='".url('sadmin/sliders')."/status/$post->id}}/1'class='"."btn btn-danger btn-xs'>Deactive</a>";
-              
-
-                // }
-                      
-
-    $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='sliders/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
+                $nestedData['action']="<div class='dropdown display-ib'>"."<a href='javascript:;' class='mrgn-l-xs' data-toggle='dropdown' data-hover='dropdown' data-close-others='true' aria-expanded='false'><i class='fa fa-cog fa-lg base-dark'></i></a>"."<ul class='dropdown-menu dropdown-arrow dropdown-menu-right'>"."<li>"."<a href='sliders/".$post->id."/edit'><i class='fa fa-edit'></i> <span class='mrgn-l-sm'>Edit </span>". "</a></li><li><a href='#'"."onclick=".'"return delete_data('.$post->id.');">'."<i class='fa fa-trash'></i><span class='mrgn-l-sm'>Delete </span></a></a></li></ul></div>";
        
-
                 $data[] = $nestedData;
                 $i++;
             }
         }          
+        // pr($totalData); die;
         $json_data=array(
                   "draw"            => intval($request->input('draw')),  
                   "recordsTotal"    => intval($totalData),  
                   "recordsFiltered" => intval($totalFiltered), 
                   "data"            => $data   
                     );
-
-        // dd($json_data);
-
+        // pr($json_data); die;
        echo json_encode($json_data,JSON_UNESCAPED_UNICODE ); 
         
     }   

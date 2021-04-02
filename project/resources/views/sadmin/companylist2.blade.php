@@ -51,7 +51,7 @@
                     </div>
 
                     
-<!-- 
+                    <!-- 
                      <table class="table table-striped table-bordered" cellspacing="0" id="example" width="100%">
 
                         <thead>
@@ -127,8 +127,6 @@
                         </tbody>
 
                     </table> -->
-
-
 
 
                             <div class="row clearfix">
