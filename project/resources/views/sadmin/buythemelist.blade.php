@@ -2,16 +2,6 @@
 
 @section('content')
 
-   {{--  <div class="prtm-content-wrapper">
-        <div class="prtm-content">
-            <div class="prtm-page-bar">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item text-cepitalize">
-                        <h3>Theme Buyer List</h3> </li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}">Home</a></li>
-                    <li class="breadcrumb-item">Theme Buyer List</li>
-                </ul>
-            </div> --}}
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
@@ -49,13 +39,7 @@
                         <div class="card">
                           <div class="header">
                             <h2><strong>Theme Buyer</strong> List </h2>
-                            <div class="prtm-block-title mrgn-b-lg">
-                            </div>
-                            <div class="caption">
-                                <a href="{!! url('sadmin/company/create') !!}" class="btn btn-primary hidden-sm-down float-right m-l-10" type="button">Add Company <i class="zmdi zmdi-plus"></i>
-                                </a>
-
-                            </div>
+                            <div class="prtm-block-title mrgn-b-lg"></div>
                           </div>
                     <div class="body">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable" cellspacing="0"  id="posts" width="100%">
@@ -68,47 +52,13 @@
                             <th>Actions</th>
                         </tr>
                         </thead>
-                        {{-- <tbody>
-                            @foreach($buytheme as $alldata)
-                                <tr>
-                                    <td>{{$alldata->themename}}</td>
-                                    <td><a href="{!! url('/')!!}/sadmin/company/{{$alldata->company_id}}">{{$alldata->comapany_name}}</a></td>
-                                    <td>{{$alldata->payment}}</td>
-                                    <td>{{$alldata->created_at->format('jS M Y')}}</td>
-                                    <td><a href="{!! url('/')!!}/sadmin/company/{{$alldata->company_id}}" class="btn btn-success btn-sm">View</a></td>
-                                </tr>
-                            @endforeach
-                        </tbody> --}}
+                        
                     </table>
                 </div>
                 </div>
               </div>
             </div>
-                         <!--                <div class="row">
-                        <div class="col-xs-12">
-                            <div class="box-body table-responsive">
-
-
-                                  <table class="table table-bordered" id="posts">
-                                <thead>  
-                                          <tr class="bg-primary">
-                                         <th>Theme Name</th>
-                                        <th>Company Name</th>
-                                        <th>Payment</th>
-                                        <th>Payment Date</th>
-                                        <th>Actions</th>
-                                        </tr>
-                                </thead> 
-                                <tbody>
-                                   
-                                </tbody>            
-                           </table>
-
-
-                            </div>
-                        </div>
-                    </div> -->
-
+                         
                 </div>
             </div>
         </div>
@@ -127,6 +77,7 @@
         $('#posts').DataTable({
             "processing": true,
             "serverSide": true,
+            "columnDefs" : [{"targets":1, "type":"date"}],
             "ajax":{
                      "url": "{{ url('sadmin/allpoststhemebuyer') }}",
                      "dataType": "json",
