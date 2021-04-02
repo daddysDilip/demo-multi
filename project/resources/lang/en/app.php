@@ -406,6 +406,7 @@ return [
     'BrandStatusUpdatedMsg'     => 'Brand Status Updated Successfully.',
     'LargeBannerUpdatedMsg'     => 'Large Banner Updated Successfully.',
     'NewBrandLogoMsg'           => 'New Brand Logo Added Successfully.',
+    'BrandUpdateMsg'            => 'Brand Logo Updated Successfully.',
     'BrandDeletedMsg'           => 'Brand Deleted Successfully.',
     'BannerStatusUpdatedMsg'    => 'Banner Status Updated Successfully.',
     'BannerUpdatedMsg'          => 'Banner Updated Successfully.',
