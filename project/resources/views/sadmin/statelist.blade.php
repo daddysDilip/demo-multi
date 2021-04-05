@@ -35,7 +35,6 @@
                   <h2><strong>State</strong> List </h2>
                   <div class="prtm-block-title mrgn-b-lg">
                   </div>
-                  {{-- <label class="control-label" >Select Country :</label> --}}
                   <select name="country" id="country" class="form-control"  autocomplete="off">
                     <option value="0" selected="selected">Select Country</option>
                     @foreach($country as $countries) { ?>  
