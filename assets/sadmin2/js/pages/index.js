@@ -7,9 +7,9 @@
 $(function() {
     "use strict";
     initSparkline();
-    initDonutChart();
-    MorrisArea();
-    Jknob();
+    // initDonutChart();
+    // MorrisArea();
+    // Jknob();
 });
 
 // Start
@@ -21,7 +21,7 @@ function initSparkline() {
 }
 //End
 //Start
-function initDonutChart() {
+/*function initDonutChart() {
     Morris.Donut({
         element: 'donut_chart',
         data: [{
@@ -47,9 +47,9 @@ function initDonutChart() {
             return y + '%'
         }
     });
-}//End
+}*///End
 //Start
-function MorrisArea() {
+/*function MorrisArea() {
     Morris.Area({
         element: 'area_chart',
         data: [{
@@ -150,10 +150,10 @@ function MorrisArea() {
         resize: true
     
     });
-}
+}*/
 //End
 //Start
-function Jknob() {
+/*function Jknob() {
     $('.knob').knob({
         draw: function() {
             // "tron" case
@@ -202,7 +202,7 @@ function Jknob() {
             }
         }
     });
-}
+}*/
 //End
 //Start
 $(window).on('scroll',function() {
@@ -217,7 +217,7 @@ $(window).on('scroll',function() {
 });
 //End
 //Start
-$(".dial1").knob();
+// $(".dial1").knob();
 $({
     animatedVal: 0
 }).animate({
@@ -229,7 +229,7 @@ $({
         $(".dial1").val(Math.ceil(this.animatedVal)).trigger("change");
     }
 });
-$(".dial2").knob();
+// $(".dial2").knob();
 $({
     animatedVal: 0
 }).animate({
@@ -241,7 +241,7 @@ $({
         $(".dial2").val(Math.ceil(this.animatedVal)).trigger("change");
     }
 });
-$(".dial3").knob();
+// $(".dial3").knob();
 $({
     animatedVal: 0
 }).animate({
@@ -253,7 +253,7 @@ $({
         $(".dial3").val(Math.ceil(this.animatedVal)).trigger("change");
     }
 });
-$(".dial4").knob();
+// $(".dial4").knob();
 $({
     animatedVal: 0
 }).animate({
@@ -268,7 +268,7 @@ $({
 //End
 //Start
 $(function() {
-    $('#world-map-markers').vectorMap({
+    /*$('#world-map-markers').vectorMap({
         map: 'world_mill_en',
         normalizeFunction: 'polynomial',
         hoverOpacity: 0.7,
@@ -322,7 +322,7 @@ $(function() {
                 name: 'United Kingdom'
             },
         ]
-    });
+    });*/
 });
 //End
 

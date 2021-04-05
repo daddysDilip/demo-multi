@@ -56,10 +56,22 @@ class CityController extends Controller
      */
     public function create()
     {
-        $state = State::where('status',1)->get();
-        return view('sadmin.cityadd',compact('state'));
+        $country = Country::where('status',1)->get();
+        return view('sadmin.cityadd',compact('country'));
     }
 
+    public function get_state_dropdown()
+    {
+
+        echo '<div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <select class="form-control show-tick col-md-7 col-xs-12" name="stateid" id="stateid">
+                            <option value="">Select State</option>
+                            
+                          </select>
+                        </div>
+                      </div>'; die;
+    }
     /**
      * Store a newly created resource in storage.
      *

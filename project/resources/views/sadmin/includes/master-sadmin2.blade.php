@@ -340,7 +340,7 @@
 <script src="{{ URL::asset('assets/sadmin2/plugins/jquery-datatable/buttons/buttons.html5.min.js')}}"></script>
 <script src="{{ URL::asset('assets/sadmin2/plugins/jquery-datatable/buttons/buttons.print.min.js')}}"></script>
 <script src="{{ URL::asset('assets/sadmin2/plugins/multi-select/js/jquery.multi-select.js')}}"></script> <!-- Multi Select Plugin Js --> 
-<script src="{{ URL::asset('assets/sadmin2/js/pages/forms/advanced-form-elements.js')}}"></script> 
+{{-- <script src="{{ URL::asset('assets/sadmin2/js/pages/forms/advanced-form-elements.js')}}"></script>  --}}
 
 <script src="{{ URL::asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="{{ URL::asset('assets/js/additional-methods.min.js')}}"></script>
