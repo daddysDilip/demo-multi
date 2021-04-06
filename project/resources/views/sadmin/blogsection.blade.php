@@ -29,61 +29,7 @@
                         </div>
                     </div>
                     <!-- Page Content -->
-                   <!--  <div class="panel panel-default">
-                        <div class="panel-body">
-                            <table class="table table-striped table-bordered" cellspacing="0" id="example" width="100%">
-                                <thead>
-                                <tr class="bg-primary">
-                                    <th>Featured Image</th>
-                                    <th>Blog Title</th>
-                                    <th>Views</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($blogs as $blog)
-                                    <tr>
-                                        <td>
-                                            @if($blog->featured_image != '')
-                                            <img src="{{url('/assets/images/blog')}}/{{$blog->featured_image}}" alt="" class="service-icon" width="120px" height="70px">
-                                            @else
-                                            <img class="service-icon"  src="{{url('/')}}/assets/images/placeholder.jpg" width="120px" height="70px">
-                                            @endif
-                                        </td>
-                                        <td>{{$blog->title}}</td>
-                                        <td>{{$blog->views}}</td>
-                                        <td>
-                                            @if($blog->status == 1)
-                                                <a href="{!! url('sadmin/blog') !!}/status/{{$blog->id}}/0" class="btn btn-success btn-xs">Active</a>
-                                            @elseif($blog->status == 0)
-                                                <a href="{!! url('sadmin/blog') !!}/status/{{$blog->id}}/1" class="btn btn-danger btn-xs">Deactive</a>
-                                             @endif
-                                        </td>
-                                        <td>
-                                            <div class="dropdown display-ib">
-                                                <a href="javascript:;" class="mrgn-l-xs" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false"><i class="fa fa-cog fa-lg base-dark"></i></a>
-                                                <ul class="dropdown-menu dropdown-arrow dropdown-menu-right">
-                                                    <li>
-                                                        <a href="blog/{{$blog->id}}/edit"><i class="fa fa-edit"></i> <span class="mrgn-l-sm">Edit </span> </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" onclick="return delete_data('{{$blog->id}}');"><i class="fa fa-trash"></i> <span class="mrgn-l-sm">Delete </span></a>
-                                                    </li>
-                                                </ul>  
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
- -->
-                        <!-- ===========================> -->
-
-
-
+                   
         <div class="row">
             <div class="col-xs-12">
                 <div class="box-body table-responsive panel-body">
@@ -112,14 +58,6 @@
                 </div>
             </div>
         </div>
-
-
-
-                        <!-- ======================> -->
-
-
-
-
 
                 </div>
                 <!-- /.end -->

@@ -1,6 +1,7 @@
 @extends('sadmin.includes.master-sadmin2')
 
 @section('content')
+
 <div class="block-header">
   <div class="row">
     <div class="col-lg-7 col-md-6 col-sm-12">
@@ -42,7 +43,7 @@
                       </div>
                       <div class="col-lg-9 col-md-9 col-sm-8">
                         <div class="form-group">
-                          <select class="form-control show-tick col-md-7 col-xs-12" name="countryid" id="countryid">
+                          <select class="form-control show-tick col-md-7 col-xs-12" name="countryid" id="country">
                             <option value="">Select Country</option>
                             @foreach($country as $countries)
                                 <option value="{{$countries->id}}">{{$countries->countryname}}</option>
@@ -51,7 +52,19 @@
                         </div>
                       </div>
                     </div>
+                    {{-- <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">State<span class="required">*</span></label>
 
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div id='state_loader' style='display: none;position: absolute;'>
+                          <img src='{{url('/')}}/assets/images/ajax.gif' width='32px' height='32px'>
+                        </div>
+
+                        <select class="form-control" name="stateid" id="stateid" required>
+                          <option value="">Select State</option>
+                        </select>
+                      </div>
+                    </div> --}}
                     <div class="row clearfix">
                       <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
                         <label for="stateid">State<span class="required">*</span></label>
@@ -65,7 +78,7 @@
                         </div>
                       </div>
                     </div>
-
+                    
                     <div class="row clearfix">
                       <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
                         <label for="cityname">City Name<span class="required">*</span></label>
@@ -101,7 +114,8 @@
             </div>
           </div>   
         </div> 
-      </form>                
+      </form>    
+               
     </div>
     <!-- /.row -->
   </div>
@@ -113,22 +127,54 @@
 @section('footer')
 
 <script type="text/javascript">
+    $(document).ready(function() {  
+
+    $("#country").change(function(){  
+        $("#state_loader").show(); 
+        $("#stateid").hide(); 
+      $.ajax({  
+        url:"{{ URL('sadmin/company/state_list') }}",  
+        data: {countryid: $(this).val(),_token : $("input[name=_token]").val()},  
+        type: "POST", 
+        success:function(data)
+        {  
+          $("#stateid").show();  
+          $("#stateid").html(data);  
+          $("#state_loader").hide();
+        }  
+        });  
+
+      });
+
+  });  
     $(document).ready(function(){
-        $("#countryid").change(function () {
+        /*$("#countryid").change(function () {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
-            alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+            // alert("Selected Text: " + selectedText + " Value: " + selectedValue);
             $.ajax({
-              url: "{{ URL('sadmin/get_state_dropdown') }}",
-              data:{countryId:selectedValue,_token: "{{ csrf_token() }}"},
+              {{-- url: "{{ URL('sadmin/get_state_dropdown') }}", --}}
+              data:{countryId:selectedValue,'_token': "{{ csrf_token() }}"},
               type:"POST",
               success: function(res){
-                // $("#results").append(html);
-                console.log('------------->');
+                // alert(res);
+                $("#stateid").html(res);
+                $("#stateid1").html(res);
+                // console.log('------------->');
                 console.log('------------->',res);
+                var len = res.length;
+
+                $("#stateid").empty();
+                for( var i = 0; i<len; i++){
+                    var id = res[i]['id'];
+                    var name = res[i]['statename'];
+
+                    $("#stateid").append("<option value='"+id+"'>"+name+"</option>");
+
+                }
               }
             });
-        });
+        });*/
         $(':input').change(function() {
             $(this).val($(this).val().trim());
         });

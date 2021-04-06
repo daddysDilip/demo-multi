@@ -60,17 +60,18 @@ class CityController extends Controller
         return view('sadmin.cityadd',compact('country'));
     }
 
-    public function get_state_dropdown()
+    public function get_state_dropdown(Request $request)
     {
 
-        echo '<div class="col-lg-9 col-md-9 col-sm-8">
-                        <div class="form-group">
-                          <select class="form-control show-tick col-md-7 col-xs-12" name="stateid" id="stateid">
-                            <option value="">Select State</option>
-                            
-                          </select>
-                        </div>
-                      </div>'; die;
+        $state = State::where('status',1)->where('countryid',$request->countryId)->get();
+        // echo json_encode($state);
+        echo '<option value="">Select State</option>';
+        foreach($state as $key)
+        {
+            echo '<option value="'.$key->id.'">'.$key->statename.'</option>';
+        }                    
+        //echo '</select>'; 
+        die;
     }
     /**
      * Store a newly created resource in storage.
