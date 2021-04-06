@@ -54,7 +54,6 @@
                     </div>
 
                     <div class="row clearfix">
-                      {{-- <input type="hidden" name="domainname" value="{{get_subdomain()}}"> --}}
                       <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
                         <label for="countryid">State Name<span class="required">*</span></label>
                       </div>
