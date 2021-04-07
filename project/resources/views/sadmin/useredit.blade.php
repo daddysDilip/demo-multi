@@ -1,118 +1,172 @@
-@extends('sadmin.includes.master-sadmin')
-
+@extends('sadmin.includes.master-sadmin2')
 @section('content')
-
-    <div class="prtm-content-wrapper">
-        <div class="prtm-content">
-            <div class="prtm-page-bar">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item text-cepitalize">
-                        <h3>User Section</h3> </li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/cms') !!}">User Section</a></li>
-                    <li class="breadcrumb-item">Manage User</li>
-                </ul>
-            </div>
-
+<div class="block-header">
+  <div class="row">
+    <div class="col-lg-7 col-md-6 col-sm-12">
+      <h2>User</h2>
+    </div>
+    <div class="col-lg-5 col-md-6 col-sm-12">
+      <ul class="breadcrumb float-md-right">
+        <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}"><i class="zmdi zmdi-home"></i> Home</a></li>
+        <li class="breadcrumb-item"><a href="{!! url('sadmin/user') !!}">User</a></li>
+        <li class="breadcrumb-item active">Manage User</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
             <!-- Page Content -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div id="response"></div>
-                    <form method="POST" action="{{url('sadmin/user')}}/{{$user->id}}" class="form-horizontal form-label-left" enctype="multipart/form-data" id="user_form">
-                        {{csrf_field()}}
-                        <input type="hidden" name="id" value="{{$user->id}}">
-                        <input type="hidden" name="_method" value="PATCH">
-						<div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name<span class="required">*</span>
-                                <p class="small-label">(In Any Language)</p>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="name" class="form-control col-md-7 col-xs-12" name="name" value="{{$user->name}}" placeholder="Enter Name" type="text" maxlength="30" minlength="3">
-                            </div>
-                        </div>
-						
-						<div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Email<span class="required">*</span>
-                                <p class="small-label">(In Any Language)</p>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="email" class="form-control col-md-7 col-xs-12" name="email" value="{{$user->email}}"  placeholder="Enter Email Address" type="email" maxlength="50" minlength="3" disabled="disabled">
-                            </div>
-                        </div>
-						
-						<div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Phone<span class="required">*</span>
-                                <p class="small-label">(In Any Language)</p>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="phone" class="form-control col-md-7 col-xs-12" name="phone" value="{{$user->phone}}" placeholder="Enter Phone Number" type="text" maxlength="15" minlength="10" onkeypress="return isNumber(event)" >
-                            </div>
-                        </div>
-						
-						
-						
-						<div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Role<span class="required">*</span>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div id="res">
+          @if(Session::has('message'))
+              <div class="alert alert-success alert-dismissable">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  {{ Session::get('message') }}
+              </div>
+          @endif
+      </div>
+      <form method="POST" action="{{url('sadmin/user')}}/{{$user->id}}" class="form-horizontal form-label-left" enctype="multipart/form-data" id="user_form">
+        {{csrf_field()}}
 
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="role" id="role">
-                                        <option value="">Select Role</option>
-                                       @foreach($roles as $role)
-                                            @if($user->role == $role->id)
-                                                <option value="{{$role->id}}" selected>{{$role->role}}</option>
-                                            @else
-                                                <option value="{{$role->id}}">{{$role->role}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+        <input type="hidden" name="id" value="{{$user->id}}">
+        <input type="hidden" name="_method" value="PATCH">
+				<div class="row clearfix">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="body">
+                <div class="prtm-block min-height-505">
+                  <div class="form-horizontal"> 
+                    
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="countryid">Name<span class="required">*</span>
+                                <p class="small-label">(In Any Language)</p>
+                            </label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <input id="name" class="form-control col-md-7 col-xs-12" name="name" value="{{$user->name}}" placeholder="Enter Name" type="text" maxlength="30" minlength="3">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="countryid">Email<span class="required">*</span>
+                                <p class="small-label">(In Any Language)</p>
+                            </label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <input id="email" class="form-control col-md-7 col-xs-12" name="email" value="{{$user->email}}"  placeholder="Enter Email Address" type="email" maxlength="50" minlength="3" disabled="disabled">
+                        </div>
+                      </div>
+                    </div>
+						        
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="countryid">Phone<span class="required">*</span>
+                                <p class="small-label">(In Any Language)</p>
+                            </label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <input id="phone" class="form-control col-md-7 col-xs-12" name="phone" value="{{$user->phone}}" placeholder="Enter Phone Number" type="text" maxlength="15" minlength="10" onkeypress="return isNumber(event)" >
+                        </div>
+                      </div>
+                    </div>
+						        
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="countryid">Role<span class="required">*</span></label>
+                      </div>
+                      <div class="col-md-5 col-sm-6 col-xs-5">
+                        <select class="form-control" name="role" id="role">
+                          <option value="">Select Role</option>
+                          @foreach($roles as $role)
+                            @if($user->role == $role->id)
+                              <option value="{{$role->id}}" selected>{{$role->role}}</option>
+                            @else
+                              <option value="{{$role->id}}">{{$role->role}}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+						
+						        {{-- <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="photo">Profile Photo<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-5 col-md-6 col-sm-5">
+                        <div class="form-group">
+                          <input type="file" class="form-control" id="photo" name="photo" accept="image/*" />
+                        </div>
+                      </div>
+                    </div> --}}
+						
 					
 						
-                        <div class="loadDiv"> 
-                            @if($user->photo != '')
-                            <input type="hidden" name="_method" value="PATCH">
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number"> Profile Photo</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <img src="{!! url('/') !!}/assets/images/admin/{{$user->photo}}" style="max-height: 250px;width: 50%;" alt="No Theme Image"><br>
-                                    <a href="javascript:void(0);" style="color: #ff0000;" class="delete_img"><i class="fa fa-trash"></i> Delete photo Image</a>
-                                </div>
-                            </div>
-                            @endif    
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">@if($user->photo != '')Change Image @else Pofile Image @endif</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                   <input type="file" accept="image/*" name="photo">
-                                </div>
-                            </div>     
-                        </div>
-                     
-						<div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="slug">Is Active</label>
+                    {{-- <div class="row clearfix"> --}}
+                    <div class="item form-group">
+                      @if($user->photo != '')
+                      <input type="hidden" name="_method" value="PATCH">
+                      <div class="row clearfix">
+                        <label class="col-lg-3 col-md-3 col-sm-4 form-control-label"> Profile Photo</label>
+                          <div class="col-lg-5 col-md-6 col-sm-5">
+                            <img src="{!! url('/') !!}/assets/images/admin/{{$user->photo}}" style="max-height: 250px;width: 50%;" alt="No Theme Image"><br>
+                            <a href="javascript:void(0);" style="color: #ff0000;" class="delete_img"><i class="fa fa-trash"></i> Delete photo Image</a>
+                          </div>
+                     </div>
+                      @endif    
+                        <div class="item form-group">
+                           <div class="row clearfix">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">@if($user->photo != '')Change Image @else Pofile Image @endif</label>
+
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                @if($user->status == 1)
-                                <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="1" data-off="Deactive" checked>
-                                @elseif($user->status == 0)
-                                <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="0" data-off="Deactive">
-                                @endif
+                               <input type="file" accept="image/*" name="photo">
+
                             </div>
+                        </div>     
+                    </div>
+                  </div>
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="email_address_2">Is Active?</label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group ">
+                          @if($user->status == 1)
+                          <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="1" data-off="Deactive" checked>
+                          @elseif($user->status == 0)
+                          <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="0" data-off="Deactive" >
+                          @endif
                         </div>
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-3">
-                                <button type="submit" class="btn btn-success">Update User</button>
-                                <a href="{!! url('sadmin/user') !!}" class="btn btn-danger btn-back"><i class="fa fa-arrow-left"></i> Cancel</a>
-                            </div>
-                        </div>
-                    </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
+              </div>  
+            </div>  
+          </div>  
+          <div class="ln_solid"></div>
+            <div class="col-md-12 col-lg-12">
+              <div class="card">
+                <div class="body" style="float: right;">
+                  <button type="submit" class="btn btn-success">Submit</button>
+                  <a href="{!! url('sadmin/user') !!}" class="btn btn-danger btn-back"><i class="fa fa-arrow-left"></i> Cancel</a>
+                </div>
+              </div>
+            </div>   
+        </div> 
+      </form>
+
     </div>
-    <!-- /#page-wrapper -->
+  </div>
+        <!-- /.container-fluid -->
+</div>
 @stop
 
 @section('footer')

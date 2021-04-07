@@ -1,5 +1,4 @@
 @extends('admin.includes.master-admin')
-
 @section('content')
 
     <div class="prtm-content-wrapper">
