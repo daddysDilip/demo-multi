@@ -1,70 +1,103 @@
-@extends('sadmin.includes.master-sadmin')
-
+@extends('sadmin.includes.master-sadmin2')
 @section('content')
-
-    <div class="prtm-content-wrapper">
-        <div class="prtm-content">
-            <div class="prtm-page-bar">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item text-cepitalize">
-                        <h3>Payment</h3> </li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/payment') !!}">Payment</a></li>
-                    <li class="breadcrumb-item">Manage Payment</li>
-                </ul>
-            </div>
-
-            <!-- Page Content -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div id="response"></div>
-                    <form method="POST" action="{!! action('Sadmin\PaymentMethodController@store') !!}" class="form-horizontal form-label-left" enctype="multipart/form-data" id="payment_form">
-                        {{csrf_field()}}
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="paymentname">Name<span class="required">*</span>
-                                <p class="small-label">(In Any Language)</p>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="paymentname" class="form-control col-md-7 col-xs-12" name="paymentname" placeholder="Enter Payment Name" type="text" maxlength="30" minlength="3">
-                            </div>
-                        </div>
-
-						<div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="paymenttype">Type<span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="paymenttype" class="form-control col-md-7 col-xs-12" name="paymenttype" placeholder="Enter Payment Type" type="text" maxlength="30" minlength="3">
-                            </div>
-                        </div>
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="image">Image</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                               <input type="file" accept="image/*" name="image">
-                            </div>
-                        </div>
-						
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="slug">Is Active?</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="1" data-off="Deactive" checked>
-                            </div>
-                        </div>
-
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-3">
-                                <button type="submit" class="btn btn-success">Add New Payment</button>
-                                <a href="{!! url('sadmin/payment') !!}" class="btn btn-danger btn-back"><i class="fa fa-arrow-left"></i> Cancel</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
+<div class="block-header">
+  <div class="row">
+    <div class="col-lg-7 col-md-6 col-sm-12">
+      <h2>Payment</h2>
     </div>
+    <div class="col-lg-5 col-md-6 col-sm-12">
+      <ul class="breadcrumb float-md-right">
+        <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}"><i class="zmdi zmdi-home"></i> Home</a></li>
+        <li class="breadcrumb-item"><a href="{!! url('sadmin/payment') !!}">Payment</a></li>
+        <li class="breadcrumb-item active">Manage Payment</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+    <!-- Page Content -->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div id="res">
+          @if(Session::has('message'))
+            <div class="alert alert-success alert-dismissable">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ Session::get('message') }}
+            </div>
+          @endif
+      </div>
+      <form method="POST" action="{!! action('Sadmin\PaymentMethodController@store') !!}" class="form-horizontal form-label-left" enctype="multipart/form-data" id="payment_form">
+        {{csrf_field()}}
+        <div class="row clearfix">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="body">
+                <div class="prtm-block min-height-505">
+                  <div class="form-horizontal">
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="paymentname">Name<span class="required">*</span><p class="small-label">(In Any Language)</p></label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <input id="paymentname" class="form-control col-md-7 col-xs-12" name="paymentname" placeholder="Enter Payment Name" type="text" maxlength="30" minlength="3">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="paymenttype">Type<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <input id="paymenttype" class="form-control col-md-7 col-xs-12" name="paymenttype" placeholder="Enter Payment Type" type="text" maxlength="30" minlength="3">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="image">Image<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-5 col-md-6 col-sm-5">
+                        <div class="form-group">
+                          <input type="file" class="form-control" id="image" name="image" accept="image/*" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="email_address_2">Is Active?</label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group ">
+                          <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="1" data-off="Deactive" checked>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>  
+          </div>  
+          <div class="ln_solid"></div>
+            <div class="col-md-12 col-lg-12">
+              <div class="card">
+                <div class="body" style="float: right;">
+                  <button type="submit" class="btn btn-success">Submit</button>
+                  <a href="{!! url('sadmin/payment') !!}" class="btn btn-danger btn-back"><i class="fa fa-arrow-left"></i> Cancel</a>
+                </div>
+              </div>
+            </div>   
+        </div> 
+      </form>				
+    </div>
+  </div>
+    <!-- /.container-fluid -->
+</div>
     <!-- /#page-wrapper -->
 @stop
 

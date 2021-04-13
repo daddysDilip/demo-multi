@@ -69,7 +69,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('admin.dashboard',compact('newcustomer','upgradeplan','expireplan','buytheme','ticket'));
+        return view('admin.dashboard2',compact('newcustomer','upgradeplan','expireplan','buytheme','ticket'));
     }
 
     public function monthlygraph()

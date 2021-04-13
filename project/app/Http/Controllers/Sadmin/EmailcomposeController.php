@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use File;
 use URL;
 use Mail;
+use Log;
 
 class EmailcomposeController extends Controller
 {
@@ -43,8 +44,25 @@ class EmailcomposeController extends Controller
      */
     public function store(Request $request)
     {
+        $content = $request->message;
+        Mail::send('email',compact('content'), function ($message) use ($request){
+            $message->from('roshanraj0211@gmail.com', 'RoshanRaj');
+            $message->to($request->to);
+            if($request->cc)
+                $message->cc($request->cc);
+            if($request->bcc)
+                $message->bcc($request->bcc);
+            $message->subject($request->subject);
+        }); 
 
-        $from = 'tarangtesting@gmail.com';
+        if (Mail::failures()) 
+        {
+            Log::info('Failed to send email -> '.$failures[] = Mail::failures()[0]);
+            return redirect('sadmin/emailcompose')->with('error','Mail Not Sent.');
+        } else {
+            return redirect('sadmin/emailcompose')->with('success','Mail Sent Successfully.');
+        }
+        /*$from = 'tarangtesting@gmail.com';
         $from_name = 'Estorewhiz';
         $to = $request['to']; 
        // print_r($request);
@@ -85,7 +103,7 @@ class EmailcomposeController extends Controller
         else
         {
             return redirect('sadmin/emailcompose')->with('error','Mail Not Sent.');
-        }  
+        }  */
 
     }
 

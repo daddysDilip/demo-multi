@@ -135,6 +135,7 @@ Route::group(['domain' => 'demo-multi.com'], function()
     Route::get('/sadmin/city/delete/{id}','Sadmin\CityController@destroy');
     Route::get('/sadmin/city/status/{id}/{status}','Sadmin\CityController@status');
     Route::post('/sadmin/city_exists','Sadmin\CityController@city_exists');
+    Route::post('/sadmin/get_state_dropdown','Sadmin\CityController@get_state_dropdown');
 
     Route::resource('/sadmin/payment', 'Sadmin\PaymentMethodController');
     Route::get('/sadmin/payment/delete/{id}','Sadmin\PaymentMethodController@destroy');

@@ -1,67 +1,100 @@
-@extends('sadmin.includes.master-sadmin')
+@extends('sadmin.includes.master-sadmin2')
 
 @section('content')
-
-    <div class="prtm-content-wrapper">
-        <div class="prtm-content">
-            <div class="prtm-page-bar">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item text-cepitalize">
-                        <h3>State</h3> </li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/state') !!}">State</a></li>
-                    <li class="breadcrumb-item">Manage State</li>
-                </ul>
-            </div>
-
-            <!-- Page Content -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div id="response"></div>
-                    <form method="POST" action="{!! action('Sadmin\StateController@store') !!}" class="form-horizontal form-label-left" enctype="multipart/form-data" id="state_form">
-                        {{csrf_field()}}
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="countryid">Country<span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control" name="countryid" id="countryid">
-                                    <option value="">Select Country</option>
-                                    @foreach($country as $countries)
-                                        <option value="{{$countries->id}}">{{$countries->countryname}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="statename">State Name<span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="statename" class="form-control col-md-7 col-xs-12" name="statename" placeholder="Enter State Name" type="text" maxlength="25" minlength="3">
-                            </div>
-                        </div>
-
-                        <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="slug">Is Active?</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="1" data-off="Deactive" checked>
-                            </div>
-                        </div>
-
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-3">
-                                <button type="submit" class="btn btn-success">Add State</button>
-                                <a href="{!! url('sadmin/state') !!}" class="btn btn-danger btn-back"><i class="fa fa-arrow-left"></i> Cancel</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+<div class="block-header">
+  <div class="row">
+    <div class="col-lg-7 col-md-6 col-sm-12">
+      <h2>State</h2>
     </div>
+    <div class="col-lg-5 col-md-6 col-sm-12">
+      <ul class="breadcrumb float-md-right">
+        <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}"><i class="zmdi zmdi-home"></i> Home</a></li>
+        <li class="breadcrumb-item"><a href="{!! url('sadmin/state') !!}">State</a></li>
+        <li class="breadcrumb-item active">Manage State</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+    <!-- Page Content -->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div id="res">
+          @if(Session::has('message'))
+              <div class="alert alert-success alert-dismissable">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  {{ Session::get('message') }}
+              </div>
+          @endif
+      </div>
+      <form method="POST" action="{!! action('Sadmin\StateController@store') !!}" class="form-horizontal form-label-left" enctype="multipart/form-data" id="state_form">
+              {{csrf_field()}}
+        <div class="row clearfix">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="body">
+                <div class="prtm-block min-height-505">
+                  <div class="form-horizontal"> 
+
+                    <div class="row clearfix">
+                      <input type="hidden" name="domainname" value="{{get_subdomain()}}">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="countryid">Country<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <select class="form-control show-tick col-md-7 col-xs-12" name="countryid" id="countryid">
+                            <option value="">Select Country</option>
+                            @foreach($country as $countries)
+                                <option value="{{$countries->id}}">{{$countries->countryname}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="countryid">State Name<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group">
+                          <input id="statename" class="form-control col-md-7 col-xs-12" name="statename" placeholder="Enter State Name" type="text" maxlength="25" minlength="3">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row clearfix">
+                      <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
+                        <label for="email_address_2">Is Active?</label>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-8">
+                        <div class="form-group ">
+                          <input type="checkbox" data-toggle="toggle" data-on="Active" name="status" value="1" data-off="Deactive" checked>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>  
+          </div>    
+          <div class="ln_solid"></div>
+            <div class="col-md-12 col-lg-12">
+              <div class="card">
+                <div class="body" style="float: right;">
+                  <button type="submit" class="btn btn-success">Submit</button>
+                  <a href="{!! url('sadmin/state') !!}" class="btn btn-danger btn-back"><i class="fa fa-arrow-left"></i> Cancel</a>
+                </div>
+              </div>
+            </div>   
+        </div> 
+      </form>      
+    </div>
+      <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
     <!-- /#page-wrapper -->
 @stop
 

@@ -1,72 +1,60 @@
-@extends('sadmin.includes.master-sadmin')
-
+@extends('sadmin.includes.master-sadmin2')
 @section('content')
-
-    <div class="prtm-content-wrapper">
-        <div class="prtm-content">
-            <div class="prtm-page-bar">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item text-cepitalize">
-                        <h3>Slider</h3> </li>
-                    <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}">Home</a></li>
-                    <li class="breadcrumb-item">Slider</li>
-                </ul>
-            </div>
-                
-            <!-- Page Content -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div id="response">
-                        @if(Session::has('message'))
-                            <div class="alert alert-success alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{ Session::get('message') }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="prtm-block-title mrgn-b-lg">
-                        <div class="caption">
-                            <a href="{!! url('sadmin/sliders/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add New Slider</a>
-                        </div>
-                    </div>
- 
-
-                         <div class="row">
-            <div class="col-xs-12">
-                <div class="box-body table-responsive">
-
-
-                      <table class="table table-bordered" id="posts">
-                    <thead>  
-                              <tr class="bg-primary">
-                                 <th>Slider Image</th>
-                            <th>Slider Title</th>
-                            <!-- <th width="15%">Slider Text</th> -->
-                            <th>Status</th>
-                            <th>Actions</th>
-                            </tr>
-                    </thead> 
-                    <tbody>
-                        <tr>
-                            <td>helloo</td>
-                            <td>hellooo2</td>
-                            <td>heleoeoeo4</td>
-                        </tr>
-                    </tbody>            
-               </table>
-
-
-                </div>
-            </div>
-        </div>
-
-
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
+<div class="block-header">
+  <div class="row">
+    <div class="col-lg-7 col-md-6 col-sm-12">
+      <h2>Slider</h2>
     </div>
-    <!-- /#page-wrapper -->
+    <div class="col-lg-5 col-md-6 col-sm-12">
+      <ul class="breadcrumb float-md-right">
+        <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}"><i class="zmdi zmdi-home"></i> Home</a></li>
+        <li class="breadcrumb-item active">Slider</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+
+            <!-- Page Content -->
+ <div class="panel panel-default">
+    <div class="panel-body">
+      <div id="res">
+        @if(Session::has('message'))
+          <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ Session::get('message') }}
+          </div>
+        @endif
+      </div>
+      <div class="prtm-block-title mrgn-b-lg">
+          <div class="caption">
+              <a href="{!! url('sadmin/sliders/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add New Slider</a>
+          </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-lg-12">
+          <div class="card">
+           <div class="body">
+              <table class="table table-bordered table-striped table-hover dataTable js-exportable" cellspacing="0"  id="posts" width="100%">
+                <thead>  
+                  <tr class="">
+                    <th>Slider Image</th>
+                    <th>Slider Title</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead> 
+                <tbody>
+                    
+                </tbody>            
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 @stop
 
