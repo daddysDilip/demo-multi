@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/css/main.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/css/color_skins.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/css/ecommerce.css')}}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2//plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/sadmin2/plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
     <!-- sadmin2 -->
 
     <!-- <link href="{{ URL::asset('assets/css/genius-admin.css')}}" rel="stylesheet"> -->

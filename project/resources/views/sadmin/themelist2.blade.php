@@ -5,15 +5,14 @@
         <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>Product
+                <!-- <h2>Product
                 <small class="text-muted">Welcome to Compass</small>
-                </h2>
+                </h2> -->
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12">
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Compass</a></li>
-                    <li class="breadcrumb-item"><a href="ec-dashboard.html">eCommerce</a></li>
-                    <li class="breadcrumb-item active">Product</li>
+                    <li class="breadcrumb-item"><a href="{!! url('sadmin/dashboard') !!}"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item active">Theme</li>
                 </ul>
             </div>
         </div>
