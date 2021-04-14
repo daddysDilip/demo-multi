@@ -183,10 +183,10 @@
 					                                    <label for="email_address_2">Select Country<span class="required">*</span></label>
 					                                </div>
 					                                <div class="col-lg-9 col-md-9 col-sm-8">
-					                                    <select class="form-control" name="country z-index" data-live-search="true" id="country" required >
+					                                    <select class="form-control z-index" name="country " data-live-search="true" id="country" required >
 																<option value="">Select Country</option>
 																@foreach($country as $allcountry)
-																	<option value="{{$allcountry->id}}">{{$allcountry->countryname}}</option>
+																	<option value="{{$allcountry->id}}">{{$allcountry->countryname}}</option> 
 																@endforeach
 															</select>
 					                                </div>

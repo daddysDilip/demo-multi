@@ -70,7 +70,7 @@ class SadminLoginController extends Controller
         }
         else
         {
-            return view('sadmin.login');
+            return view('sadmin.login2');
         }
     }
 

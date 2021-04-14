@@ -37,7 +37,7 @@
 
 
 <div class="page-header">
-    <div class="page-header-image" style="background-image:url(assets/images/login.jpg)"></div>
+    <div class="page-header-image" style="background-image:url({{ URL::asset('assets/sadmin2/images/login.jpg')}})"></div>
     <div class="container">
         <div class="col-md-12 content-center">
             <div class="card-plain">
@@ -87,19 +87,19 @@
     </div>
     <footer class="footer">
         <div class="container">
-            <nav>
+            <!-- <nav>
                 <ul>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
-            </nav>
+            </nav> -->
             <div class="copyright">
                 &copy;
                 <script>
                     document.write(new Date().getFullYear())
                 </script>,
-                <span>Designed by <a href="#" target="_blank">ThemeMAkker</a></span>
+                <span>Designed by <a href="https://daddyscode.com" target="_blank">Daddyscode</a></span>
             </div>
         </div>
     </footer>

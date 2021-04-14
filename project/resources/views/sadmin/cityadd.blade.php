@@ -43,7 +43,7 @@
                       </div>
                       <div class="col-lg-9 col-md-9 col-sm-8">
                         <div class="form-group">
-                          <select class="form-control show-tick col-md-7 col-xs-12" name="countryid" id="country">
+                          <select class="form-control show-tick" name="countryid" id="country" name="country z-index" data-live-search="true">
                             <option value="">Select Country</option>
                             @foreach($country as $countries)
                                 <option value="{{$countries->id}}">{{$countries->countryname}}</option>
@@ -52,7 +52,7 @@
                         </div>
                       </div>
                     </div>
-                    {{-- <div class="item form-group">
+                    <!-- {{-- <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">State<span class="required">*</span></label>
 
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -60,18 +60,18 @@
                           <img src='{{url('/')}}/assets/images/ajax.gif' width='32px' height='32px'>
                         </div>
 
-                        <select class="form-control" name="stateid" id="stateid" required>
+                        <select class="form-control show-tick" name="stateid" id="stateid" data-live-search="true" required>
                           <option value="">Select State</option>
                         </select>
                       </div>
-                    </div> --}}
+                    </div> --}} -->
                     <div class="row clearfix">
                       <div class="col-lg-3 col-md-3 col-sm-4 form-control-label">
                         <label for="stateid">State<span class="required">*</span></label>
                       </div>
                       <div class="col-lg-9 col-md-9 col-sm-8">
                         <div class="form-group">
-                          <select class="form-control show-tick col-md-7 col-xs-12" name="stateid" id="stateid">
+                          <select class="form-control show-tick " name="stateid" id="stateid" data-live-search="true">
                             <option value="">Select State</option>
                             
                           </select>
@@ -85,7 +85,7 @@
                       </div>
                       <div class="col-lg-9 col-md-9 col-sm-8">
                         <div class="form-group">
-                          <input id="cityname" class="form-control col-md-7 col-xs-12" name="cityname" placeholder="Enter City Name" type="text" maxlength="25" minlength="3">
+                          <input id="cityname" class="form-control show-tick" name="cityname" placeholder="Enter City Name" type="text" maxlength="25" minlength="3">
                         </div>
                       </div>
                     </div>
@@ -141,6 +141,7 @@
           $("#stateid").show();  
           $("#stateid").html(data);  
           $("#state_loader").hide();
+          $('#stateid').selectpicker('refresh');
         }  
         });  
 
